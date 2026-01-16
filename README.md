@@ -4,6 +4,62 @@ A modern trucking business simulation game inspired by the classic "Der Planer" 
 
 ## Features
 
+### Classic Planer Features (Authentic to Original Series)
+
+#### 📦 Comprehensive Truck System (28 Models)
+- **7 Manufacturers**: Mercedes-Benz, Volvo, Scania, MAN, DAF, Iveco, Renault
+- **4 Truck Classes**: Light (3.5t), Medium (12t), Heavy (18t), Semi (25-30t)
+- **Engine Types**: Diesel, Diesel Turbo, Electric, Hybrid, Hydrogen
+- **Detailed Specs**: Power (HP), fuel consumption, speed, reliability, comfort, maintenance costs
+- **Real Models**: Actros, FH16, S650, TGX, XF480, S-WAY, T High and more
+- **Vintage Trucks**: Classic restored models with collector value
+- **Running Costs Calculator**: Fuel, maintenance, insurance per truck
+
+#### 🏠 Family Life & Private Life Simulation
+- **Family Management**: Spouse and 2 children with happiness tracking
+- **Work-Life Balance**: Track stress, health, and time away from home
+- **Family Events**: Birthdays, anniversaries, school plays, vacations
+- **Relationship System**: Spouse happiness affects gameplay
+- **Home Ownership**: Buy homes from €150K to €500K+ with quality levels
+- **Vacation System**: Take family trips to reduce stress and increase happiness
+- **Life Milestones**: Marriage, children's achievements, retirement planning
+- **Consequences**: Neglect family = unhappy spouse, stressed player, poor performance
+
+#### 💎 Luxury Shop & Status System (40+ Items)
+- **Personal Vehicles**: VW Golf (€15K) to Rolls-Royce Ghost (€350K)
+- **Watches**: Casio (€50) to Patek Philippe (€35K)
+- **Jewelry**: Gold chains to diamond necklaces (€800-€15K)
+- **Electronics**: Laptops to smart home systems (€800-€8K)
+- **Hobbies**: Fishing, golf membership, sailing yacht, pilot license
+- **Home Decor**: Paintings, furniture, pool, wine cellar
+- **Fashion**: Designer suits and luxury wardrobe
+- **Experiences**: Spa weekends, cruises, private island vacations
+- **Social Status**: Each item boosts your status and family happiness
+- **Maintenance Costs**: Monthly upkeep for vehicles and luxury items
+
+#### 🌍 Multi-City Station System (22 European Cities)
+- **Open Stations**: Expand to Berlin, Paris, Amsterdam, Milan, Warsaw, and more
+- **Station Levels**: Small (3 trucks) → Regional (30 trucks)
+- **Regional Operations**: Assign trucks and employees to stations
+- **Profitability Tracking**: Monthly reports per station
+- **Market Factors**: Population, competition, market size affect profits
+- **Upgrades**: Expand station capacity for €25K-€60K
+- **5 Regions**: Central Europe, Western Europe, Southern Europe, Eastern Europe, Scandinavia
+- **Strategic Expansion**: Choose cities based on market opportunity
+
+#### 📦 Advanced Cargo System (24+ Cargo Types)
+- **8 Categories**: General, Perishable, Fragile, Hazardous, Valuable, Oversized, Temperature-Controlled, Express
+- **Detailed Requirements**:
+  - Refrigeration/Freezer for food
+  - HazMat license for chemicals
+  - Security for valuables
+  - Heavy vehicles for machinery
+  - Climate control for electronics
+- **Price Calculation**: Base rate × distance × weight × urgency × requirements
+- **Special Handling**: Temperature monitoring, careful loading, armed guards
+- **Risk Factors**: Damage probability and insurance costs per cargo type
+- **Regulatory Requirements**: Paperwork for hazardous materials
+
 ### Intelligent Business Simulation
 - **Dynamic Market AI**: Real-time fuel price fluctuations, seasonal demand changes, and economic cycles (boom/recession)
 - **Contract Management**: Accept delivery contracts from various clients across Europe with dynamic pricing
