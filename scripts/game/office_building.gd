@@ -520,7 +520,7 @@ func _create_truck_sale_card(truck: Dictionary) -> Control:
 	return card
 
 func _buy_truck(truck: Dictionary) -> void:
-	if GameManager.buy_truck(truck.model, truck.price, truck.fuel, truck.capacity, truck.efficiency):
+	if GameManager.buy_truck(truck.model, truck.price, truck.fuel):
 		EventBus.show_notification("Truck purchased: " + truck.model, "success")
 		if current_room_dialog:
 			_close_dialog(current_room_dialog)
