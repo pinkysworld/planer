@@ -1,5 +1,6 @@
 extends Node
 ## AudioManager - Handles all game audio including music and sound effects
+## Resilient to missing audio files
 
 signal music_volume_changed(volume: float)
 signal sfx_volume_changed(volume: float)
@@ -23,35 +24,38 @@ var music_tracks: Dictionary = {}
 # Sound effect cache
 var sfx_cache: Dictionary = {}
 
+# Track which resources actually exist
+var loaded_music: Dictionary = {}
+var loaded_sfx: Dictionary = {}
+
 func _ready() -> void:
 	_setup_audio_players()
-	_load_audio_resources()
+	_preload_audio_resources()
 
 func _setup_audio_players() -> void:
-	# Main music player
+	# Main music player - use Master bus for compatibility
 	music_player = AudioStreamPlayer.new()
-	music_player.bus = "Music"
+	music_player.bus = "Master"
 	music_player.volume_db = linear_to_db(music_volume)
 	add_child(music_player)
 	music_player.finished.connect(_on_music_finished)
 
 	# Ambient sounds player
 	ambient_player = AudioStreamPlayer.new()
-	ambient_player.bus = "Ambient"
+	ambient_player.bus = "Master"
 	ambient_player.volume_db = linear_to_db(music_volume * 0.5)
 	add_child(ambient_player)
 
 	# SFX player pool
 	for i in range(MAX_SFX_PLAYERS):
 		var player = AudioStreamPlayer.new()
-		player.bus = "SFX"
+		player.bus = "Master"
 		player.volume_db = linear_to_db(sfx_volume)
 		add_child(player)
 		sfx_players.append(player)
 
-func _load_audio_resources() -> void:
-	# These would be loaded from actual audio files
-	# For now, we'll set up the structure
+func _preload_audio_resources() -> void:
+	# Define paths - these would be actual audio files
 	music_tracks = {
 		"menu": "res://assets/audio/music/menu_theme.ogg",
 		"office": "res://assets/audio/music/office_ambience.ogg",
@@ -81,6 +85,21 @@ func _load_audio_resources() -> void:
 		"ambient_office": "res://assets/audio/sfx/ambient_office.wav"
 	}
 
+	# Try to preload resources that exist (silently skip missing ones)
+	for key in music_tracks:
+		var path = music_tracks[key]
+		if ResourceLoader.exists(path):
+			var resource = load(path)
+			if resource:
+				loaded_music[key] = resource
+
+	for key in sfx_cache:
+		var path = sfx_cache[key]
+		if ResourceLoader.exists(path):
+			var resource = load(path)
+			if resource:
+				loaded_sfx[key] = resource
+
 # Music Controls
 
 func play_music(track_name: String, fade_duration: float = 1.0) -> void:
@@ -90,28 +109,26 @@ func play_music(track_name: String, fade_duration: float = 1.0) -> void:
 	if track_name == current_track and music_player.playing:
 		return
 
-	if not music_tracks.has(track_name):
-		push_warning("Music track not found: " + track_name)
-		return
-
 	current_track = track_name
 
-	# Fade out current music
+	# Check if we have this track loaded - silently skip if not
+	if not loaded_music.has(track_name):
+		return
+
+	# Fade out current music if playing
 	if music_player.playing:
 		var tween = create_tween()
 		tween.tween_property(music_player, "volume_db", -80.0, fade_duration)
 		await tween.finished
 
-	# Load and play new track
-	var stream = load(music_tracks[track_name])
-	if stream:
-		music_player.stream = stream
-		music_player.volume_db = -80.0
-		music_player.play()
+	# Play new track
+	music_player.stream = loaded_music[track_name]
+	music_player.volume_db = -80.0
+	music_player.play()
 
-		# Fade in
-		var fade_in = create_tween()
-		fade_in.tween_property(music_player, "volume_db", linear_to_db(music_volume), fade_duration)
+	# Fade in
+	var fade_in = create_tween()
+	fade_in.tween_property(music_player, "volume_db", linear_to_db(music_volume), fade_duration)
 
 func stop_music(fade_duration: float = 1.0) -> void:
 	if music_player.playing:
@@ -138,8 +155,8 @@ func play_sfx(sfx_name: String, pitch_variation: float = 0.0) -> void:
 	if not sfx_enabled:
 		return
 
-	if not sfx_cache.has(sfx_name):
-		push_warning("SFX not found: " + sfx_name)
+	# Check if we have this SFX loaded - silently skip if not
+	if not loaded_sfx.has(sfx_name):
 		return
 
 	# Find available player
@@ -147,11 +164,9 @@ func play_sfx(sfx_name: String, pitch_variation: float = 0.0) -> void:
 	if player == null:
 		return
 
-	var stream = load(sfx_cache[sfx_name])
-	if stream:
-		player.stream = stream
-		player.pitch_scale = 1.0 + randf_range(-pitch_variation, pitch_variation)
-		player.play()
+	player.stream = loaded_sfx[sfx_name]
+	player.pitch_scale = 1.0 + randf_range(-pitch_variation, pitch_variation)
+	player.play()
 
 func _get_available_sfx_player() -> AudioStreamPlayer:
 	for player in sfx_players:
@@ -160,20 +175,18 @@ func _get_available_sfx_player() -> AudioStreamPlayer:
 	# If all busy, use the first one (oldest sound)
 	return sfx_players[0]
 
-func play_sfx_at_position(sfx_name: String, position: Vector2) -> void:
+func play_sfx_at_position(sfx_name: String, _position: Vector2) -> void:
 	# For 2D positional audio (if needed)
 	play_sfx(sfx_name)
 
 # Ambient Sounds
 
 func play_ambient(ambient_name: String) -> void:
-	if not sfx_cache.has(ambient_name):
+	if not loaded_sfx.has(ambient_name):
 		return
 
-	var stream = load(sfx_cache[ambient_name])
-	if stream:
-		ambient_player.stream = stream
-		ambient_player.play()
+	ambient_player.stream = loaded_sfx[ambient_name]
+	ambient_player.play()
 
 func stop_ambient() -> void:
 	ambient_player.stop()
@@ -196,9 +209,8 @@ func set_music_enabled(enabled: bool) -> void:
 	music_enabled = enabled
 	if not enabled:
 		stop_music(0.5)
-	else:
-		if current_track != "":
-			play_music(current_track)
+	elif current_track != "":
+		play_music(current_track)
 
 func set_sfx_enabled(enabled: bool) -> void:
 	sfx_enabled = enabled
