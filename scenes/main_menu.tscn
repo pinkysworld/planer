@@ -1,0 +1,335 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqxk3t8nj5h2l"]
+
+[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_menu"]
+[ext_resource type="Script" path="res://scripts/ui/scenario_selector.gd" id="2_scenario"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.1, 0.15, 1)
+
+[node name="BackgroundPattern" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "MODERN PLANER"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.6, 0.7, 0.8, 1)
+text = "Transport Business Simulation"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="NewGameButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "New Game"
+
+[node name="LoadGameButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Load Game"
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Quit"
+
+[node name="VersionLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -30.0
+offset_right = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.5, 0.5, 0.5, 1)
+text = "Version 1.0.0"
+horizontal_alignment = 2
+
+[node name="ScenarioSelector" type="CanvasLayer" parent="."]
+visible = false
+script = ExtResource("2_scenario")
+
+[node name="Panel" type="Panel" parent="ScenarioSelector"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="ScenarioSelector/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -250.0
+offset_right = 300.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="ScenarioSelector/Panel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Select Game Mode"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="ScenarioSelector/Panel/VBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="FreeplayButton" type="Button" parent="ScenarioSelector/Panel/VBox"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Freeplay Mode
+Build your empire without restrictions"
+
+[node name="Scenario1Button" type="Button" parent="ScenarioSelector/Panel/VBox"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Startup Challenge
+Start with €30,000 - Reach €500,000"
+
+[node name="Scenario2Button" type="Button" parent="ScenarioSelector/Panel/VBox"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "European Expansion
+Open stations in 5 countries"
+
+[node name="Scenario3Button" type="Button" parent="ScenarioSelector/Panel/VBox"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Fleet Commander
+Build a fleet of 20 trucks"
+
+[node name="Scenario4Button" type="Button" parent="ScenarioSelector/Panel/VBox"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Reputation Master
+Achieve 95% reputation rating"
+
+[node name="BackButton" type="Button" parent="ScenarioSelector/Panel/VBox"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+
+[node name="LoadGamePanel" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Panel" type="Panel" parent="LoadGamePanel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="LoadGamePanel/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -280.0
+offset_right = 300.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="LoadGamePanel/Panel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Load Game"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="LoadGamePanel/Panel/VBox"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="SaveSlotList" type="VBoxContainer" parent="LoadGamePanel/Panel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+
+[node name="BackButton" type="Button" parent="LoadGamePanel/Panel/VBox"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+
+[node name="SettingsPanel" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Panel" type="Panel" parent="SettingsPanel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="SettingsPanel/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -200.0
+offset_right = 250.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="SettingsPanel/Panel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="SettingsPanel/Panel/VBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="MusicHBox" type="HBoxContainer" parent="SettingsPanel/Panel/VBox"]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="SettingsPanel/Panel/VBox/MusicHBox"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsPanel/Panel/VBox/MusicHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 1.0
+step = 0.05
+value = 0.7
+
+[node name="MusicToggle" type="CheckButton" parent="SettingsPanel/Panel/VBox/MusicHBox"]
+layout_mode = 2
+button_pressed = true
+
+[node name="SFXHBox" type="HBoxContainer" parent="SettingsPanel/Panel/VBox"]
+layout_mode = 2
+
+[node name="SFXLabel" type="Label" parent="SettingsPanel/Panel/VBox/SFXHBox"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="SFXSlider" type="HSlider" parent="SettingsPanel/Panel/VBox/SFXHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 1.0
+step = 0.05
+value = 0.8
+
+[node name="SFXToggle" type="CheckButton" parent="SettingsPanel/Panel/VBox/SFXHBox"]
+layout_mode = 2
+button_pressed = true
+
+[node name="FullscreenHBox" type="HBoxContainer" parent="SettingsPanel/Panel/VBox"]
+layout_mode = 2
+
+[node name="FullscreenLabel" type="Label" parent="SettingsPanel/Panel/VBox/FullscreenHBox"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="Spacer" type="Control" parent="SettingsPanel/Panel/VBox/FullscreenHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FullscreenToggle" type="CheckButton" parent="SettingsPanel/Panel/VBox/FullscreenHBox"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="SettingsPanel/Panel/VBox"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back"
+
+[connection signal="pressed" from="VBoxContainer/NewGameButton" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/LoadGameButton" to="." method="_on_load_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="ScenarioSelector/Panel/VBox/FreeplayButton" to="ScenarioSelector" method="_on_freeplay_pressed"]
+[connection signal="pressed" from="ScenarioSelector/Panel/VBox/Scenario1Button" to="ScenarioSelector" method="_on_scenario1_pressed"]
+[connection signal="pressed" from="ScenarioSelector/Panel/VBox/Scenario2Button" to="ScenarioSelector" method="_on_scenario2_pressed"]
+[connection signal="pressed" from="ScenarioSelector/Panel/VBox/Scenario3Button" to="ScenarioSelector" method="_on_scenario3_pressed"]
+[connection signal="pressed" from="ScenarioSelector/Panel/VBox/Scenario4Button" to="ScenarioSelector" method="_on_scenario4_pressed"]
+[connection signal="pressed" from="ScenarioSelector/Panel/VBox/BackButton" to="ScenarioSelector" method="_on_back_pressed"]
+[connection signal="pressed" from="LoadGamePanel/Panel/VBox/BackButton" to="." method="_on_load_back_pressed"]
+[connection signal="value_changed" from="SettingsPanel/Panel/VBox/MusicHBox/MusicSlider" to="." method="_on_music_volume_changed"]
+[connection signal="toggled" from="SettingsPanel/Panel/VBox/MusicHBox/MusicToggle" to="." method="_on_music_toggled"]
+[connection signal="value_changed" from="SettingsPanel/Panel/VBox/SFXHBox/SFXSlider" to="." method="_on_sfx_volume_changed"]
+[connection signal="toggled" from="SettingsPanel/Panel/VBox/SFXHBox/SFXToggle" to="." method="_on_sfx_toggled"]
+[connection signal="toggled" from="SettingsPanel/Panel/VBox/FullscreenHBox/FullscreenToggle" to="." method="_on_fullscreen_toggled"]
+[connection signal="pressed" from="SettingsPanel/Panel/VBox/BackButton" to="." method="_on_settings_back_pressed"]

@@ -1,0 +1,49 @@
+# Godot 4+ specific ignores
+.godot/
+
+# Godot-specific ignores
+*.translation
+export.cfg
+export_presets.cfg
+
+# Imported textures and samples
+*.import
+
+# Build files
+*.exe
+*.x86_64
+*.x86
+*.arm64
+*.apk
+*.aab
+*.ipa
+*.dmg
+*.app
+
+# IDE
+.idea/
+*.sublime-project
+*.sublime-workspace
+.vscode/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
+
+# Logs
+*.log
+
+# User-specific
+*.user
+
+# Export templates
+android/build/
+
+# PCK files
+*.pck
