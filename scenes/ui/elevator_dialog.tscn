@@ -1,0 +1,87 @@
+[gd_scene load_steps=2 format=3 uid="uid://j0k1n3p6x9c5m"]
+
+[ext_resource type="Script" path="res://scripts/ui/elevator_dialog.gd" id="1_script"]
+
+[node name="ElevatorDialog" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.85)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -180.0
+offset_right = 150.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Elevator"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Floor3Btn" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Floor 3 - Executive"
+
+[node name="Floor2Btn" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Floor 2 - Administration"
+
+[node name="Floor1Btn" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Floor 1 - Operations"
+
+[node name="Floor0Btn" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Basement - Services"
+
+[node name="CancelBtn" type="Button" parent="Panel/VBox"]
+layout_mode = 2
+text = "Cancel"
+
+[connection signal="pressed" from="Panel/VBox/Floor3Btn" to="." method="_on_floor_pressed" binds=[3]]
+[connection signal="pressed" from="Panel/VBox/Floor2Btn" to="." method="_on_floor_pressed" binds=[2]]
+[connection signal="pressed" from="Panel/VBox/Floor1Btn" to="." method="_on_floor_pressed" binds=[1]]
+[connection signal="pressed" from="Panel/VBox/Floor0Btn" to="." method="_on_floor_pressed" binds=[0]]
+[connection signal="pressed" from="Panel/VBox/CancelBtn" to="." method="_on_cancel_pressed"]

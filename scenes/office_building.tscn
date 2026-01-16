@@ -1,0 +1,874 @@
+[gd_scene load_steps=5 format=3 uid="uid://cx8k2y7t3m1np"]
+
+[ext_resource type="Script" path="res://scripts/game/office_building.gd" id="1_building"]
+[ext_resource type="Script" path="res://scripts/game/player_character.gd" id="2_player"]
+[ext_resource type="Script" path="res://scripts/ui/game_hud.gd" id="3_hud"]
+[ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="4_pause"]
+
+[node name="OfficeBuilding" type="Node2D"]
+script = ExtResource("1_building")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+zoom = Vector2(1, 1)
+
+[node name="BuildingContainer" type="Node2D" parent="."]
+
+[node name="Background" type="ColorRect" parent="BuildingContainer"]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.15, 0.18, 0.25, 1)
+
+[node name="BuildingExterior" type="Node2D" parent="BuildingContainer"]
+position = Vector2(40, 80)
+
+[node name="Floor0_Basement" type="Node2D" parent="BuildingContainer/BuildingExterior"]
+position = Vector2(0, 480)
+
+[node name="FloorBG" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor0_Basement"]
+offset_right = 1200.0
+offset_bottom = 150.0
+color = Color(0.25, 0.22, 0.2, 1)
+
+[node name="FloorLabel" type="Label" parent="BuildingContainer/BuildingExterior/Floor0_Basement"]
+offset_left = -35.0
+offset_top = 60.0
+offset_right = -5.0
+offset_bottom = 83.0
+text = "B"
+horizontal_alignment = 1
+
+[node name="Room_Garage" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor0_Basement"]
+position = Vector2(50, 20)
+
+[node name="DoorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Room_Garage"]
+offset_right = 120.0
+offset_bottom = 110.0
+color = Color(0.4, 0.35, 0.3, 1)
+
+[node name="DoorFrame" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Room_Garage"]
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 115.0
+offset_bottom = 100.0
+color = Color(0.3, 0.25, 0.2, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Room_Garage"]
+offset_top = 115.0
+offset_right = 120.0
+offset_bottom = 138.0
+text = "Garage"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Room_Garage"]
+position = Vector2(60, 55)
+shape = SubResource("RectangleShape2D_garage")
+
+[node name="Room_PR" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor0_Basement"]
+position = Vector2(200, 20)
+
+[node name="DoorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Room_PR"]
+offset_right = 120.0
+offset_bottom = 110.0
+color = Color(0.35, 0.4, 0.45, 1)
+
+[node name="DoorFrame" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Room_PR"]
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 115.0
+offset_bottom = 100.0
+color = Color(0.25, 0.3, 0.35, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Room_PR"]
+offset_top = 115.0
+offset_right = 120.0
+offset_bottom = 138.0
+text = "PR & Marketing"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Room_PR"]
+position = Vector2(60, 55)
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Room_TruckDealer1" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor0_Basement"]
+position = Vector2(350, 20)
+
+[node name="DoorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Room_TruckDealer1"]
+offset_right = 120.0
+offset_bottom = 110.0
+color = Color(0.5, 0.4, 0.3, 1)
+
+[node name="DoorFrame" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Room_TruckDealer1"]
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 115.0
+offset_bottom = 100.0
+color = Color(0.4, 0.3, 0.2, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Room_TruckDealer1"]
+offset_top = 115.0
+offset_right = 120.0
+offset_bottom = 138.0
+text = "Truck Dealer"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Room_TruckDealer1"]
+position = Vector2(60, 55)
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Room_Exit" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor0_Basement"]
+position = Vector2(500, 20)
+
+[node name="DoorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Room_Exit"]
+offset_right = 120.0
+offset_bottom = 110.0
+color = Color(0.3, 0.5, 0.4, 1)
+
+[node name="DoorFrame" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Room_Exit"]
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 115.0
+offset_bottom = 100.0
+color = Color(0.2, 0.4, 0.3, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Room_Exit"]
+offset_top = 115.0
+offset_right = 120.0
+offset_bottom = 138.0
+text = "Exit / Travel"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Room_Exit"]
+position = Vector2(60, 55)
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Elevator" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor0_Basement"]
+position = Vector2(1050, 20)
+
+[node name="ElevatorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Elevator"]
+offset_right = 100.0
+offset_bottom = 110.0
+color = Color(0.5, 0.5, 0.55, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Elevator"]
+offset_top = 115.0
+offset_right = 100.0
+offset_bottom = 138.0
+text = "Elevator"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor0_Basement/Elevator"]
+position = Vector2(50, 55)
+shape = SubResource("RectangleShape2D_elevator")
+
+[node name="Floor1_Ground" type="Node2D" parent="BuildingContainer/BuildingExterior"]
+position = Vector2(0, 320)
+
+[node name="FloorBG" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor1_Ground"]
+offset_right = 1200.0
+offset_bottom = 150.0
+color = Color(0.28, 0.3, 0.35, 1)
+
+[node name="FloorLabel" type="Label" parent="BuildingContainer/BuildingExterior/Floor1_Ground"]
+offset_left = -35.0
+offset_top = 60.0
+offset_right = -5.0
+offset_bottom = 83.0
+text = "1"
+horizontal_alignment = 1
+
+[node name="Room_Reception" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor1_Ground"]
+position = Vector2(50, 20)
+
+[node name="DoorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Room_Reception"]
+offset_right = 120.0
+offset_bottom = 110.0
+color = Color(0.4, 0.45, 0.5, 1)
+
+[node name="DoorFrame" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Room_Reception"]
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 115.0
+offset_bottom = 100.0
+color = Color(0.3, 0.35, 0.4, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Room_Reception"]
+offset_top = 115.0
+offset_right = 120.0
+offset_bottom = 138.0
+text = "Reception"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Room_Reception"]
+position = Vector2(60, 55)
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Room_Contracts" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor1_Ground"]
+position = Vector2(200, 20)
+
+[node name="DoorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Room_Contracts"]
+offset_right = 120.0
+offset_bottom = 110.0
+color = Color(0.45, 0.4, 0.5, 1)
+
+[node name="DoorFrame" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Room_Contracts"]
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 115.0
+offset_bottom = 100.0
+color = Color(0.35, 0.3, 0.4, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Room_Contracts"]
+offset_top = 115.0
+offset_right = 120.0
+offset_bottom = 138.0
+text = "Contracts"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Room_Contracts"]
+position = Vector2(60, 55)
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Room_Dispatch" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor1_Ground"]
+position = Vector2(350, 20)
+
+[node name="DoorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Room_Dispatch"]
+offset_right = 120.0
+offset_bottom = 110.0
+color = Color(0.4, 0.5, 0.45, 1)
+
+[node name="DoorFrame" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Room_Dispatch"]
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 115.0
+offset_bottom = 100.0
+color = Color(0.3, 0.4, 0.35, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Room_Dispatch"]
+offset_top = 115.0
+offset_right = 120.0
+offset_bottom = 138.0
+text = "Dispatch"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Room_Dispatch"]
+position = Vector2(60, 55)
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Room_Stations" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor1_Ground"]
+position = Vector2(500, 20)
+
+[node name="DoorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Room_Stations"]
+offset_right = 120.0
+offset_bottom = 110.0
+color = Color(0.5, 0.45, 0.4, 1)
+
+[node name="DoorFrame" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Room_Stations"]
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 115.0
+offset_bottom = 100.0
+color = Color(0.4, 0.35, 0.3, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Room_Stations"]
+offset_top = 115.0
+offset_right = 120.0
+offset_bottom = 138.0
+text = "Stations"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Room_Stations"]
+position = Vector2(60, 55)
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Elevator" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor1_Ground"]
+position = Vector2(1050, 20)
+
+[node name="ElevatorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Elevator"]
+offset_right = 100.0
+offset_bottom = 110.0
+color = Color(0.5, 0.5, 0.55, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Elevator"]
+offset_top = 115.0
+offset_right = 100.0
+offset_bottom = 138.0
+text = "Elevator"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor1_Ground/Elevator"]
+position = Vector2(50, 55)
+shape = SubResource("RectangleShape2D_elevator")
+
+[node name="Floor2_Upper" type="Node2D" parent="BuildingContainer/BuildingExterior"]
+position = Vector2(0, 160)
+
+[node name="FloorBG" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor2_Upper"]
+offset_right = 1200.0
+offset_bottom = 150.0
+color = Color(0.32, 0.35, 0.4, 1)
+
+[node name="FloorLabel" type="Label" parent="BuildingContainer/BuildingExterior/Floor2_Upper"]
+offset_left = -35.0
+offset_top = 60.0
+offset_right = -5.0
+offset_bottom = 83.0
+text = "2"
+horizontal_alignment = 1
+
+[node name="Room_Office" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor2_Upper"]
+position = Vector2(50, 20)
+
+[node name="DoorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_Office"]
+offset_right = 120.0
+offset_bottom = 110.0
+color = Color(0.45, 0.5, 0.55, 1)
+
+[node name="DoorFrame" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_Office"]
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 115.0
+offset_bottom = 100.0
+color = Color(0.35, 0.4, 0.45, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_Office"]
+offset_top = 115.0
+offset_right = 120.0
+offset_bottom = 138.0
+text = "Your Office"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_Office"]
+position = Vector2(60, 55)
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Room_Accounting" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor2_Upper"]
+position = Vector2(200, 20)
+
+[node name="DoorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_Accounting"]
+offset_right = 120.0
+offset_bottom = 110.0
+color = Color(0.5, 0.5, 0.45, 1)
+
+[node name="DoorFrame" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_Accounting"]
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 115.0
+offset_bottom = 100.0
+color = Color(0.4, 0.4, 0.35, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_Accounting"]
+offset_top = 115.0
+offset_right = 120.0
+offset_bottom = 138.0
+text = "Accounting"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_Accounting"]
+position = Vector2(60, 55)
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Room_HR" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor2_Upper"]
+position = Vector2(350, 20)
+
+[node name="DoorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_HR"]
+offset_right = 120.0
+offset_bottom = 110.0
+color = Color(0.55, 0.45, 0.5, 1)
+
+[node name="DoorFrame" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_HR"]
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 115.0
+offset_bottom = 100.0
+color = Color(0.45, 0.35, 0.4, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_HR"]
+offset_top = 115.0
+offset_right = 120.0
+offset_bottom = 138.0
+text = "HR / Employees"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_HR"]
+position = Vector2(60, 55)
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Room_Email" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor2_Upper"]
+position = Vector2(500, 20)
+
+[node name="DoorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_Email"]
+offset_right = 120.0
+offset_bottom = 110.0
+color = Color(0.4, 0.5, 0.55, 1)
+
+[node name="DoorFrame" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_Email"]
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 115.0
+offset_bottom = 100.0
+color = Color(0.3, 0.4, 0.45, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_Email"]
+offset_top = 115.0
+offset_right = 120.0
+offset_bottom = 138.0
+text = "Email / Comms"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_Email"]
+position = Vector2(60, 55)
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Room_Bank" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor2_Upper"]
+position = Vector2(650, 20)
+
+[node name="DoorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_Bank"]
+offset_right = 120.0
+offset_bottom = 110.0
+color = Color(0.55, 0.5, 0.4, 1)
+
+[node name="DoorFrame" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_Bank"]
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 115.0
+offset_bottom = 100.0
+color = Color(0.45, 0.4, 0.3, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_Bank"]
+offset_top = 115.0
+offset_right = 120.0
+offset_bottom = 138.0
+text = "Bank / Loans"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Room_Bank"]
+position = Vector2(60, 55)
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Elevator" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor2_Upper"]
+position = Vector2(1050, 20)
+
+[node name="ElevatorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Elevator"]
+offset_right = 100.0
+offset_bottom = 110.0
+color = Color(0.5, 0.5, 0.55, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Elevator"]
+offset_top = 115.0
+offset_right = 100.0
+offset_bottom = 138.0
+text = "Elevator"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor2_Upper/Elevator"]
+position = Vector2(50, 55)
+shape = SubResource("RectangleShape2D_elevator")
+
+[node name="Floor3_Top" type="Node2D" parent="BuildingContainer/BuildingExterior"]
+position = Vector2(0, 0)
+
+[node name="FloorBG" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor3_Top"]
+offset_right = 1200.0
+offset_bottom = 150.0
+color = Color(0.35, 0.38, 0.45, 1)
+
+[node name="FloorLabel" type="Label" parent="BuildingContainer/BuildingExterior/Floor3_Top"]
+offset_left = -35.0
+offset_top = 60.0
+offset_right = -5.0
+offset_bottom = 83.0
+text = "3"
+horizontal_alignment = 1
+
+[node name="Room_BoardRoom" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor3_Top"]
+position = Vector2(50, 20)
+
+[node name="DoorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor3_Top/Room_BoardRoom"]
+offset_right = 150.0
+offset_bottom = 110.0
+color = Color(0.5, 0.55, 0.6, 1)
+
+[node name="DoorFrame" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor3_Top/Room_BoardRoom"]
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 145.0
+offset_bottom = 100.0
+color = Color(0.4, 0.45, 0.5, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor3_Top/Room_BoardRoom"]
+offset_top = 115.0
+offset_right = 150.0
+offset_bottom = 138.0
+text = "Board Room"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor3_Top/Room_BoardRoom"]
+position = Vector2(75, 55)
+shape = SubResource("RectangleShape2D_large")
+
+[node name="Room_Statistics" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor3_Top"]
+position = Vector2(230, 20)
+
+[node name="DoorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor3_Top/Room_Statistics"]
+offset_right = 120.0
+offset_bottom = 110.0
+color = Color(0.45, 0.55, 0.5, 1)
+
+[node name="DoorFrame" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor3_Top/Room_Statistics"]
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 115.0
+offset_bottom = 100.0
+color = Color(0.35, 0.45, 0.4, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor3_Top/Room_Statistics"]
+offset_top = 115.0
+offset_right = 120.0
+offset_bottom = 138.0
+text = "Statistics"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor3_Top/Room_Statistics"]
+position = Vector2(60, 55)
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Room_Luxury" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor3_Top"]
+position = Vector2(380, 20)
+
+[node name="DoorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor3_Top/Room_Luxury"]
+offset_right = 120.0
+offset_bottom = 110.0
+color = Color(0.6, 0.5, 0.4, 1)
+
+[node name="DoorFrame" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor3_Top/Room_Luxury"]
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 115.0
+offset_bottom = 100.0
+color = Color(0.5, 0.4, 0.3, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor3_Top/Room_Luxury"]
+offset_top = 115.0
+offset_right = 120.0
+offset_bottom = 138.0
+text = "Luxury Shop"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor3_Top/Room_Luxury"]
+position = Vector2(60, 55)
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Room_Home" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor3_Top"]
+position = Vector2(530, 20)
+
+[node name="DoorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor3_Top/Room_Home"]
+offset_right = 120.0
+offset_bottom = 110.0
+color = Color(0.5, 0.6, 0.55, 1)
+
+[node name="DoorFrame" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor3_Top/Room_Home"]
+offset_left = 5.0
+offset_top = 10.0
+offset_right = 115.0
+offset_bottom = 100.0
+color = Color(0.4, 0.5, 0.45, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor3_Top/Room_Home"]
+offset_top = 115.0
+offset_right = 120.0
+offset_bottom = 138.0
+text = "Go Home"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor3_Top/Room_Home"]
+position = Vector2(60, 55)
+shape = SubResource("RectangleShape2D_door")
+
+[node name="Elevator" type="Area2D" parent="BuildingContainer/BuildingExterior/Floor3_Top"]
+position = Vector2(1050, 20)
+
+[node name="ElevatorSprite" type="ColorRect" parent="BuildingContainer/BuildingExterior/Floor3_Top/Elevator"]
+offset_right = 100.0
+offset_bottom = 110.0
+color = Color(0.5, 0.5, 0.55, 1)
+
+[node name="Label" type="Label" parent="BuildingContainer/BuildingExterior/Floor3_Top/Elevator"]
+offset_top = 115.0
+offset_right = 100.0
+offset_bottom = 138.0
+text = "Elevator"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/BuildingExterior/Floor3_Top/Elevator"]
+position = Vector2(50, 55)
+shape = SubResource("RectangleShape2D_elevator")
+
+[node name="Player" type="CharacterBody2D" parent="BuildingContainer"]
+position = Vector2(700, 530)
+script = ExtResource("2_player")
+
+[node name="Sprite" type="ColorRect" parent="BuildingContainer/Player"]
+offset_left = -20.0
+offset_top = -60.0
+offset_right = 20.0
+offset_bottom = 0.0
+color = Color(0.3, 0.5, 0.7, 1)
+
+[node name="Head" type="ColorRect" parent="BuildingContainer/Player"]
+offset_left = -12.0
+offset_top = -80.0
+offset_right = 12.0
+offset_bottom = -60.0
+color = Color(0.9, 0.75, 0.65, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/Player"]
+position = Vector2(0, -30)
+shape = SubResource("RectangleShape2D_player")
+
+[node name="InteractionArea" type="Area2D" parent="BuildingContainer/Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuildingContainer/Player/InteractionArea"]
+position = Vector2(0, -30)
+shape = SubResource("RectangleShape2D_interaction")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="GameHUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_hud")
+
+[node name="TopBar" type="Panel" parent="UI/GameHUD"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 60.0
+grow_horizontal = 2
+
+[node name="HBox" type="HBoxContainer" parent="UI/GameHUD/TopBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="TimeDisplay" type="HBoxContainer" parent="UI/GameHUD/TopBar/HBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="DayLabel" type="Label" parent="UI/GameHUD/TopBar/HBox/TimeDisplay"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Day 1"
+
+[node name="TimeLabel" type="Label" parent="UI/GameHUD/TopBar/HBox/TimeDisplay"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "08:00"
+
+[node name="SpeedControls" type="HBoxContainer" parent="UI/GameHUD/TopBar/HBox"]
+layout_mode = 2
+
+[node name="PauseBtn" type="Button" parent="UI/GameHUD/TopBar/HBox/SpeedControls"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "||"
+
+[node name="Speed1Btn" type="Button" parent="UI/GameHUD/TopBar/HBox/SpeedControls"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = ">"
+
+[node name="Speed2Btn" type="Button" parent="UI/GameHUD/TopBar/HBox/SpeedControls"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = ">>"
+
+[node name="Speed3Btn" type="Button" parent="UI/GameHUD/TopBar/HBox/SpeedControls"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = ">>>"
+
+[node name="Spacer" type="Control" parent="UI/GameHUD/TopBar/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoneyDisplay" type="VBoxContainer" parent="UI/GameHUD/TopBar/HBox"]
+layout_mode = 2
+
+[node name="CompanyMoney" type="Label" parent="UI/GameHUD/TopBar/HBox/MoneyDisplay"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Company: €50,000"
+
+[node name="PrivateMoney" type="Label" parent="UI/GameHUD/TopBar/HBox/MoneyDisplay"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.7, 0.8, 0.7, 1)
+text = "Private: €5,000"
+
+[node name="StatsDisplay" type="VBoxContainer" parent="UI/GameHUD/TopBar/HBox"]
+layout_mode = 2
+
+[node name="ReputationLabel" type="Label" parent="UI/GameHUD/TopBar/HBox/StatsDisplay"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Reputation: 50%"
+
+[node name="TrucksLabel" type="Label" parent="UI/GameHUD/TopBar/HBox/StatsDisplay"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Trucks: 2 | Employees: 1"
+
+[node name="MenuButton" type="Button" parent="UI/GameHUD/TopBar/HBox"]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+text = "Menu"
+
+[node name="BottomBar" type="Panel" parent="UI/GameHUD"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBox" type="HBoxContainer" parent="UI/GameHUD/BottomBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="LocationLabel" type="Label" parent="UI/GameHUD/BottomBar/HBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Office Building - Floor 1"
+
+[node name="Spacer" type="Control" parent="UI/GameHUD/BottomBar/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="InteractionHint" type="Label" parent="UI/GameHUD/BottomBar/HBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.8, 0.8, 0.6, 1)
+text = "Press E to interact"
+
+[node name="NotificationContainer" type="VBoxContainer" parent="UI/GameHUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_top = 70.0
+offset_right = -10.0
+offset_bottom = 300.0
+grow_horizontal = 0
+
+[node name="PauseMenu" type="CanvasLayer" parent="UI"]
+visible = false
+script = ExtResource("4_pause")
+
+[node name="Panel" type="Panel" parent="UI/PauseMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="UI/PauseMenu/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -200.0
+offset_right = 150.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="UI/PauseMenu/Panel/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="UI/PauseMenu/Panel/VBox"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ResumeButton" type="Button" parent="UI/PauseMenu/Panel/VBox"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Resume"
+
+[node name="SaveButton" type="Button" parent="UI/PauseMenu/Panel/VBox"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Save Game"
+
+[node name="LoadButton" type="Button" parent="UI/PauseMenu/Panel/VBox"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Load Game"
+
+[node name="SettingsButton" type="Button" parent="UI/PauseMenu/Panel/VBox"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Settings"
+
+[node name="MainMenuButton" type="Button" parent="UI/PauseMenu/Panel/VBox"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Main Menu"
+
+[node name="QuitButton" type="Button" parent="UI/PauseMenu/Panel/VBox"]
+custom_minimum_size = Vector2(0, 45)
+layout_mode = 2
+text = "Quit Game"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_garage"]
+size = Vector2(120, 110)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_door"]
+size = Vector2(120, 110)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_elevator"]
+size = Vector2(100, 110)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_large"]
+size = Vector2(150, 110)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_player"]
+size = Vector2(40, 60)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_interaction"]
+size = Vector2(60, 80)
+
+[connection signal="pressed" from="UI/GameHUD/TopBar/HBox/SpeedControls/PauseBtn" to="UI/GameHUD" method="_on_pause_pressed"]
+[connection signal="pressed" from="UI/GameHUD/TopBar/HBox/SpeedControls/Speed1Btn" to="UI/GameHUD" method="_on_speed1_pressed"]
+[connection signal="pressed" from="UI/GameHUD/TopBar/HBox/SpeedControls/Speed2Btn" to="UI/GameHUD" method="_on_speed2_pressed"]
+[connection signal="pressed" from="UI/GameHUD/TopBar/HBox/SpeedControls/Speed3Btn" to="UI/GameHUD" method="_on_speed3_pressed"]
+[connection signal="pressed" from="UI/GameHUD/TopBar/HBox/MenuButton" to="UI/GameHUD" method="_on_menu_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/Panel/VBox/ResumeButton" to="UI/PauseMenu" method="_on_resume_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/Panel/VBox/SaveButton" to="UI/PauseMenu" method="_on_save_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/Panel/VBox/LoadButton" to="UI/PauseMenu" method="_on_load_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/Panel/VBox/SettingsButton" to="UI/PauseMenu" method="_on_settings_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/Panel/VBox/MainMenuButton" to="UI/PauseMenu" method="_on_main_menu_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/Panel/VBox/QuitButton" to="UI/PauseMenu" method="_on_quit_pressed"]

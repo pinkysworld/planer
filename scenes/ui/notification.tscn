@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://o5k6n8p1x4c0m"]
+
+[ext_resource type="Script" path="res://scripts/ui/notification.gd" id="1_script"]
+
+[node name="Notification" type="PanelContainer"]
+custom_minimum_size = Vector2(280, 50)
+script = ExtResource("1_script")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+text = "Notification message"
+autowrap_mode = 3

@@ -1,0 +1,160 @@
+[gd_scene load_steps=2 format=3 uid="uid://l2k3n5p8x1c7m"]
+
+[ext_resource type="Script" path="res://scripts/ui/bank_dialog.gd" id="1_script"]
+
+[node name="BankDialog" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.85)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -250.0
+offset_right = 350.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Header" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Panel/VBox/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Bank & Loans"
+
+[node name="Spacer" type="Control" parent="Panel/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CloseButton" type="Button" parent="Panel/VBox/Header"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "X"
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="BalanceSection" type="VBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="BalanceLabel" type="Label" parent="Panel/VBox/BalanceSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Company Balance: €50,000"
+
+[node name="DebtLabel" type="Label" parent="Panel/VBox/BalanceSection"]
+layout_mode = 2
+text = "Current Debt: €0"
+
+[node name="MaxLoanLabel" type="Label" parent="Panel/VBox/BalanceSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "Max Loan Available: €50,000 (based on reputation)"
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="LoanSection" type="VBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="TakeLoanLabel" type="Label" parent="Panel/VBox/LoanSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Take a Loan"
+
+[node name="LoanHBox" type="HBoxContainer" parent="Panel/VBox/LoanSection"]
+layout_mode = 2
+
+[node name="LoanAmountInput" type="SpinBox" parent="Panel/VBox/LoanSection/LoanHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1000.0
+max_value = 100000.0
+step = 1000.0
+value = 10000.0
+
+[node name="TakeLoanBtn" type="Button" parent="Panel/VBox/LoanSection/LoanHBox"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Take Loan"
+
+[node name="InterestLabel" type="Label" parent="Panel/VBox/LoanSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "Interest Rate: 0.5% per month"
+
+[node name="HSeparator3" type="HSeparator" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="RepaySection" type="VBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="RepayLoanLabel" type="Label" parent="Panel/VBox/RepaySection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Repay Loan"
+
+[node name="RepayHBox" type="HBoxContainer" parent="Panel/VBox/RepaySection"]
+layout_mode = 2
+
+[node name="RepayAmountInput" type="SpinBox" parent="Panel/VBox/RepaySection/RepayHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 1000.0
+max_value = 100000.0
+step = 1000.0
+value = 10000.0
+
+[node name="RepayLoanBtn" type="Button" parent="Panel/VBox/RepaySection/RepayHBox"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Repay"
+
+[node name="RepayAllBtn" type="Button" parent="Panel/VBox/RepaySection"]
+layout_mode = 2
+text = "Repay All"
+
+[node name="Footer" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="InfoLabel" type="Label" parent="Panel/VBox/Footer"]
+layout_mode = 2
+text = "Higher reputation allows larger loans"
+
+[connection signal="pressed" from="Panel/VBox/Header/CloseButton" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Panel/VBox/LoanSection/LoanHBox/TakeLoanBtn" to="." method="_on_take_loan_pressed"]
+[connection signal="pressed" from="Panel/VBox/RepaySection/RepayHBox/RepayLoanBtn" to="." method="_on_repay_loan_pressed"]
+[connection signal="pressed" from="Panel/VBox/RepaySection/RepayAllBtn" to="." method="_on_repay_all_pressed"]

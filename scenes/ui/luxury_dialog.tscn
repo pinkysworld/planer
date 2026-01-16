@@ -1,0 +1,121 @@
+[gd_scene load_steps=2 format=3 uid="uid://h8k9n1p4x7c3m"]
+
+[ext_resource type="Script" path="res://scripts/ui/luxury_dialog.gd" id="1_script"]
+
+[node name="LuxuryDialog" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.85)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -300.0
+offset_right = 450.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Panel/VBox/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Luxury Shop"
+
+[node name="Spacer" type="Control" parent="Panel/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoneyLabel" type="Label" parent="Panel/VBox/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Private: €5,000"
+
+[node name="Spacer2" type="Control" parent="Panel/VBox/Header"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="Panel/VBox/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Status: 10%"
+
+[node name="Spacer3" type="Control" parent="Panel/VBox/Header"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="Panel/VBox/Header"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "X"
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="ItemsList" type="ScrollContainer" parent="Panel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ItemsContainer" type="VBoxContainer" parent="Panel/VBox/ItemsList"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="OwnedSection" type="VBoxContainer" parent="Panel/VBox"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="OwnedTitle" type="Label" parent="Panel/VBox/OwnedSection"]
+layout_mode = 2
+text = "Your Luxury Items:"
+
+[node name="OwnedLabel" type="Label" parent="Panel/VBox/OwnedSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "None yet"
+autowrap_mode = 3
+
+[node name="Footer" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="InfoLabel" type="Label" parent="Panel/VBox/Footer"]
+layout_mode = 2
+text = "Buy luxury items to increase your social status!"
+
+[connection signal="pressed" from="Panel/VBox/Header/CloseButton" to="." method="_on_close_pressed"]

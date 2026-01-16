@@ -1,0 +1,197 @@
+[gd_scene load_steps=2 format=3 uid="uid://g7k8n0p3x6c2m"]
+
+[ext_resource type="Script" path="res://scripts/ui/home_dialog.gd" id="1_script"]
+
+[node name="HomeDialog" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.85)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -300.0
+offset_right = 400.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Panel/VBox/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Home Sweet Home"
+
+[node name="Spacer" type="Control" parent="Panel/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CloseButton" type="Button" parent="Panel/VBox/Header"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "X"
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="MainContent" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 30
+
+[node name="FamilySection" type="VBoxContainer" parent="Panel/VBox/MainContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FamilyTitle" type="Label" parent="Panel/VBox/MainContent/FamilySection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Family"
+
+[node name="HappinessBar" type="HBoxContainer" parent="Panel/VBox/MainContent/FamilySection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBox/MainContent/FamilySection/HappinessBar"]
+layout_mode = 2
+text = "Happiness:"
+
+[node name="HappinessProgress" type="ProgressBar" parent="Panel/VBox/MainContent/FamilySection/HappinessBar"]
+custom_minimum_size = Vector2(150, 20)
+layout_mode = 2
+max_value = 100.0
+value = 75.0
+show_percentage = true
+
+[node name="Spacer" type="Control" parent="Panel/VBox/MainContent/FamilySection"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="WifeSection" type="VBoxContainer" parent="Panel/VBox/MainContent/FamilySection"]
+layout_mode = 2
+
+[node name="WifeLabel" type="Label" parent="Panel/VBox/MainContent/FamilySection/WifeSection"]
+layout_mode = 2
+text = "Partner"
+
+[node name="WifeRequest" type="Label" parent="Panel/VBox/MainContent/FamilySection/WifeSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "\"Could you give me some money for shopping?\""
+
+[node name="WifeGiveBtn" type="Button" parent="Panel/VBox/MainContent/FamilySection/WifeSection"]
+layout_mode = 2
+text = "Give €500"
+
+[node name="Spacer2" type="Control" parent="Panel/VBox/MainContent/FamilySection"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="ChildSection" type="VBoxContainer" parent="Panel/VBox/MainContent/FamilySection"]
+layout_mode = 2
+
+[node name="ChildLabel" type="Label" parent="Panel/VBox/MainContent/FamilySection/ChildSection"]
+layout_mode = 2
+text = "Child"
+
+[node name="ChildRequest" type="Label" parent="Panel/VBox/MainContent/FamilySection/ChildSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "\"Dad, I need money for a new video game!\""
+
+[node name="ChildGiveBtn" type="Button" parent="Panel/VBox/MainContent/FamilySection/ChildSection"]
+layout_mode = 2
+text = "Give €100"
+
+[node name="StatusSection" type="VBoxContainer" parent="Panel/VBox/MainContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatusTitle" type="Label" parent="Panel/VBox/MainContent/StatusSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Your Status"
+
+[node name="PrivateMoneyLabel" type="Label" parent="Panel/VBox/MainContent/StatusSection"]
+layout_mode = 2
+text = "Private Money: €5,000"
+
+[node name="SocialStatusBar" type="HBoxContainer" parent="Panel/VBox/MainContent/StatusSection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/VBox/MainContent/StatusSection/SocialStatusBar"]
+layout_mode = 2
+text = "Social Status:"
+
+[node name="StatusProgress" type="ProgressBar" parent="Panel/VBox/MainContent/StatusSection/SocialStatusBar"]
+custom_minimum_size = Vector2(150, 20)
+layout_mode = 2
+max_value = 100.0
+value = 10.0
+show_percentage = true
+
+[node name="Spacer" type="Control" parent="Panel/VBox/MainContent/StatusSection"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="RetirementSection" type="VBoxContainer" parent="Panel/VBox/MainContent/StatusSection"]
+layout_mode = 2
+
+[node name="RetirementLabel" type="Label" parent="Panel/VBox/MainContent/StatusSection/RetirementSection"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Retirement requires 75% social status
+and 50% family happiness"
+horizontal_alignment = 1
+
+[node name="RetireButton" type="Button" parent="Panel/VBox/MainContent/StatusSection/RetirementSection"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+disabled = true
+text = "Retire (End Game)"
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Footer" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="InfoLabel" type="Label" parent="Panel/VBox/Footer"]
+layout_mode = 2
+text = "Spend time with your family to keep them happy!"
+
+[connection signal="pressed" from="Panel/VBox/Header/CloseButton" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Panel/VBox/MainContent/FamilySection/WifeSection/WifeGiveBtn" to="." method="_on_give_wife_money"]
+[connection signal="pressed" from="Panel/VBox/MainContent/FamilySection/ChildSection/ChildGiveBtn" to="." method="_on_give_child_money"]
+[connection signal="pressed" from="Panel/VBox/MainContent/StatusSection/RetirementSection/RetireButton" to="." method="_on_retire_pressed"]

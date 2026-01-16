@@ -1,0 +1,149 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3k4n6p9x2c8m"]
+
+[ext_resource type="Script" path="res://scripts/ui/dispatch_dialog.gd" id="1_script"]
+
+[node name="DispatchDialog" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.85)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -550.0
+offset_top = -320.0
+offset_right = 550.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Panel/VBox/Header"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Dispatch Center"
+
+[node name="Spacer" type="Control" parent="Panel/VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CloseButton" type="Button" parent="Panel/VBox/Header"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+text = "X"
+
+[node name="HSeparator" type="HSeparator" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="MainContent" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="AcceptedContracts" type="VBoxContainer" parent="Panel/VBox/MainContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Panel/VBox/MainContent/AcceptedContracts"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Accepted Contracts"
+
+[node name="ContractsList" type="ScrollContainer" parent="Panel/VBox/MainContent/AcceptedContracts"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ContractsContainer" type="VBoxContainer" parent="Panel/VBox/MainContent/AcceptedContracts/ContractsList"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AvailableTrucks" type="VBoxContainer" parent="Panel/VBox/MainContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Panel/VBox/MainContent/AvailableTrucks"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Available Trucks"
+
+[node name="TrucksList" type="ScrollContainer" parent="Panel/VBox/MainContent/AvailableTrucks"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TrucksContainer" type="VBoxContainer" parent="Panel/VBox/MainContent/AvailableTrucks/TrucksList"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AvailableDrivers" type="VBoxContainer" parent="Panel/VBox/MainContent"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Panel/VBox/MainContent/AvailableDrivers"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Available Drivers"
+
+[node name="DriversList" type="ScrollContainer" parent="Panel/VBox/MainContent/AvailableDrivers"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DriversContainer" type="VBoxContainer" parent="Panel/VBox/MainContent/AvailableDrivers/DriversList"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Footer" type="HBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="InfoLabel" type="Label" parent="Panel/VBox/Footer"]
+layout_mode = 2
+text = "Select a contract, truck, and driver to start a delivery"
+
+[node name="Spacer" type="Control" parent="Panel/VBox/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StartDeliveryButton" type="Button" parent="Panel/VBox/Footer"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+disabled = true
+text = "Start Delivery"
+
+[connection signal="pressed" from="Panel/VBox/Header/CloseButton" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Panel/VBox/Footer/StartDeliveryButton" to="." method="_on_start_delivery_pressed"]
