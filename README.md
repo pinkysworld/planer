@@ -4,20 +4,43 @@ A modern trucking business simulation game inspired by the classic "Der Planer" 
 
 ## Features
 
-### Business Simulation
-- **Contract Management**: Accept delivery contracts from various clients across Europe
+### Intelligent Business Simulation
+- **Dynamic Market AI**: Real-time fuel price fluctuations, seasonal demand changes, and economic cycles (boom/recession)
+- **Contract Management**: Accept delivery contracts from various clients across Europe with dynamic pricing
+- **AI Competitors**: Compete against 5+ intelligent AI companies that bid on contracts, expand operations, and can go bankrupt
 - **Fleet Management**: Purchase, maintain, and sell trucks (diesel, electric, hydrogen)
-- **Employee Management**: Hire and manage drivers, mechanics, accountants, and more
-- **Route Planning**: Plan optimal routes between cities for maximum profit
+- **Smart Employee AI**: Employees with unique personalities, skill progression, life events (marriage, illness, burnout), morale management, and can request raises or quit
+- **Advanced Route Optimization**: AI-powered route planning with real-time traffic incidents, weather conditions (rain, snow, fog, storms), and seasonal effects
 - **Station Expansion**: Open stations in new cities across Central Europe, Scandinavia, and Southern Europe
-- **Financial Management**: Take loans, manage expenses, and grow your company
+- **Risk Management**: Comprehensive insurance system with 6 policy types, claims processing, and dynamic risk assessment
+- **Research & Development**: Unlock 20+ technologies including fuel efficiency, autonomous driving, electric/hydrogen infrastructure, and AI systems
+- **Financial Management**: Take loans, manage expenses, and grow your company with intelligent market forecasts
+
+### Advanced AI Systems
+- **Market Intelligence**: Economic state tracking, cargo demand fluctuations, competitor activity monitoring
+- **Weather Simulation**: Regional weather with 7 weather types affecting delivery speed and risk
+- **Traffic System**: Dynamic traffic incidents (accidents, construction, protests) with severity levels
+- **Employee Evolution**: Skill development, experience gain, personality traits affecting performance
+- **Competitor Strategies**: AI companies with different personalities (aggressive, cautious, specialist) and strategic decision-making
+
+### Enhanced Graphics & Effects
+- **Dynamic Day/Night Cycle**: Realistic lighting changes from dawn to dusk with ambient color shifts
+- **Visual Effects System**: Particle effects for success, money, warnings, smoke, and sparkles
+- **Weather Visualization**: Rain, snow, fog effects with visual overlays
+- **Animation System**: Floating text, pulse effects, screen shake, fade in/out
+- **Lighting System**: Time-based ambient lighting with orange dawn/dusk and blue night tints
 
 ### Modern Updates (vs Original)
 - Email communication instead of fax
 - Modern truck models with electric and hydrogen options
-- Current fuel prices and regulations
-- Updated graphics while maintaining the classic pixel art style
-- GPS and route optimization technology
+- Dynamic fuel prices with market fluctuations
+- Advanced AI competitors and market simulation
+- Comprehensive insurance and risk management
+- Technology research tree with 20+ unlockable upgrades
+- Real-time weather and traffic simulation
+- Enhanced graphics with particle effects and dynamic lighting
+- Employee personality and life event simulation
+- GPS and AI-powered route optimization
 
 ### Private Life Simulation
 - Balance work with family life
