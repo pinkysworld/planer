@@ -10,14 +10,11 @@ extends Control
 @onready var location_label = $BottomBar/HBox/LocationLabel
 @onready var interaction_hint = $BottomBar/HBox/InteractionHint
 @onready var notification_container = $NotificationContainer
-@onready var pause_menu = %PauseMenu
-
-var notification_scene = preload("res://scenes/ui/notification.tscn")
 
 func _ready() -> void:
 	_connect_signals()
 	_update_display()
-	interaction_hint.visible = false
+	interaction_hint.visible = true
 
 func _connect_signals() -> void:
 	GameManager.day_changed.connect(_on_day_changed)
@@ -25,13 +22,8 @@ func _connect_signals() -> void:
 	GameManager.money_changed.connect(_on_money_changed)
 	GameManager.reputation_changed.connect(_on_reputation_changed)
 	EventBus.notification_shown.connect(_show_notification)
-	EventBus.contract_accepted.connect(_on_contract_accepted)
-	EventBus.delivery_completed.connect(_on_delivery_completed)
-	EventBus.truck_purchased.connect(_on_truck_purchased)
-	EventBus.employee_hired.connect(_on_employee_hired)
 
 func _process(_delta: float) -> void:
-	# Update time display every frame for smooth updating
 	_update_time_display()
 
 func _update_display() -> void:
@@ -41,29 +33,33 @@ func _update_display() -> void:
 	_update_stats_display()
 
 func _update_day_display() -> void:
-	day_label.text = "Day %d" % GameManager.current_day
+	if day_label:
+		day_label.text = "Day %d" % GameManager.current_day
 
 func _update_time_display() -> void:
-	time_label.text = "%02d:%02d" % [GameManager.current_hour, GameManager.current_minute]
+	if time_label:
+		time_label.text = "%02d:%02d" % [GameManager.current_hour, GameManager.current_minute]
 
 func _update_money_display() -> void:
-	company_money_label.text = "Company: €%s" % _format_money(GameManager.company_money)
-	private_money_label.text = "Private: €%s" % _format_money(GameManager.private_money)
-
-	# Color coding for money
-	if GameManager.company_money < 10000:
-		company_money_label.add_theme_color_override("font_color", Color(1, 0.5, 0.5))
-	elif GameManager.company_money > 100000:
-		company_money_label.add_theme_color_override("font_color", Color(0.5, 1, 0.5))
-	else:
-		company_money_label.remove_theme_color_override("font_color")
+	if company_money_label:
+		company_money_label.text = "Company: €%s" % _format_money(GameManager.company_money)
+		
+		if GameManager.company_money < 10000:
+			company_money_label.add_theme_color_override("font_color", Color(1, 0.5, 0.5))
+		elif GameManager.company_money > 100000:
+			company_money_label.add_theme_color_override("font_color", Color(0.5, 1, 0.5))
+		else:
+			company_money_label.remove_theme_color_override("font_color")
+	
+	if private_money_label:
+		private_money_label.text = "Private: €%s" % _format_money(GameManager.private_money)
 
 func _update_stats_display() -> void:
-	reputation_label.text = "Reputation: %.0f%%" % GameManager.company_reputation
-	trucks_label.text = "Trucks: %d | Employees: %d" % [
-		GameManager.trucks.size(),
-		GameManager.employees.size()
-	]
+	if reputation_label:
+		reputation_label.text = "Reputation: %.0f%%" % GameManager.company_reputation
+	if trucks_label:
+		var drivers = GameManager.employees.filter(func(e): return e.role == "Driver").size()
+		trucks_label.text = "Trucks: %d | Drivers: %d" % [GameManager.trucks.size(), drivers]
 
 func _format_money(amount: float) -> String:
 	if amount >= 1000000:
@@ -73,63 +69,61 @@ func _format_money(amount: float) -> String:
 	else:
 		return "%.0f" % amount
 
-# Signal handlers
-func _on_day_changed(day: int) -> void:
+func _on_day_changed(_day: int) -> void:
 	_update_day_display()
 
-func _on_time_changed(hour: int, minute: int) -> void:
+func _on_time_changed(_hour: int, _minute: int) -> void:
 	_update_time_display()
 
-func _on_money_changed(company: float, private: float) -> void:
+func _on_money_changed(_company: float, _private: float) -> void:
 	_update_money_display()
 
-func _on_reputation_changed(reputation: float) -> void:
+func _on_reputation_changed(_reputation: float) -> void:
 	_update_stats_display()
 
-func _on_contract_accepted(contract: Dictionary) -> void:
-	_show_notification("Contract accepted: %s" % contract.client, "success")
-	_update_stats_display()
-
-func _on_delivery_completed(delivery: Dictionary, on_time: bool) -> void:
-	if on_time:
-		_show_notification("Delivery completed on time!", "success")
-	else:
-		_show_notification("Delivery completed late - penalty applied", "warning")
-	_update_stats_display()
-
-func _on_truck_purchased(truck: Dictionary) -> void:
-	_show_notification("New truck purchased: %s" % truck.model, "info")
-	_update_stats_display()
-
-func _on_employee_hired(employee: Dictionary) -> void:
-	_show_notification("New employee hired: %s" % employee.name, "info")
-	_update_stats_display()
-
-# Location and interaction hints
 func update_location(location: String) -> void:
-	location_label.text = location
+	if location_label:
+		location_label.text = location
 
 func show_interaction_hint(text: String) -> void:
-	interaction_hint.text = text
-	interaction_hint.visible = true
+	if interaction_hint:
+		interaction_hint.text = text
+		interaction_hint.visible = true
 
 func hide_interaction_hint() -> void:
-	interaction_hint.visible = false
+	if interaction_hint:
+		interaction_hint.text = "Click on a door or press E to interact"
 
-# Notifications
 func _show_notification(message: String, type: String) -> void:
-	var notification = notification_scene.instantiate()
-	notification.setup(message, type)
+	if notification_container == null:
+		return
+	
+	var notification = PanelContainer.new()
+	notification.custom_minimum_size = Vector2(300, 50)
+	
+	var label = Label.new()
+	label.text = message
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	notification.add_child(label)
+	
+	match type:
+		"success":
+			label.add_theme_color_override("font_color", Color(0.3, 1, 0.5))
+		"error":
+			label.add_theme_color_override("font_color", Color(1, 0.4, 0.4))
+		"warning":
+			label.add_theme_color_override("font_color", Color(1, 0.8, 0.3))
+	
 	notification_container.add_child(notification)
-
+	
 	# Auto-remove after delay
-	var timer = get_tree().create_timer(5.0)
+	var timer = get_tree().create_timer(4.0)
 	timer.timeout.connect(func():
 		if is_instance_valid(notification):
 			notification.queue_free()
 	)
 
-# Speed controls
 func _on_pause_pressed() -> void:
 	AudioManager.play_sfx("click")
 	GameManager.set_game_speed(0.0)
@@ -152,5 +146,7 @@ func _on_speed3_pressed() -> void:
 
 func _on_menu_pressed() -> void:
 	AudioManager.play_sfx("click")
-	get_parent().get_node("PauseMenu").visible = true
-	GameManager.pause_game()
+	var pause_menu = get_parent().get_node_or_null("PauseMenu")
+	if pause_menu:
+		pause_menu.visible = true
+		GameManager.pause_game()
