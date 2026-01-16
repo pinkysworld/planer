@@ -343,10 +343,12 @@ func _create_rain_effect(parent: Node, heavy: bool) -> void:
 	# Create rain particle effect
 	var particle_count = 200 if heavy else 100
 	# In a full game, this would use GPUParticles2D or CPUParticles2D
+	pass
 
 func _create_snow_effect(parent: Node) -> void:
 	# Create snow particle effect
 	# In a full game, this would use GPUParticles2D
+	pass
 
 func _create_fog_effect(parent: Node) -> void:
 	# Create fog overlay effect
