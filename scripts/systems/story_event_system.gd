@@ -519,6 +519,7 @@ func _apply_consequences(consequence: Dictionary, event: Dictionary) -> void:
 	if consequence.has("achievement"):
 		if has_node("/root/AchievementSystem"):
 			# Would trigger special achievement
+			pass
 
 	# Many more consequences...
 
