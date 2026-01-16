@@ -158,6 +158,16 @@ func hide_hint() -> void:
 	if hint_label:
 		hint_label.text = "Click to move • Click doors to enter"
 
+func update_location(location: String) -> void:
+	# Can add a location label if needed
+	pass
+
+func show_interaction_hint(text: String) -> void:
+	show_hint(text)
+
+func hide_interaction_hint() -> void:
+	hide_hint()
+
 func _format_money(amount: float) -> String:
 	if amount >= 1000000:
 		return "%.1fM" % (amount / 1000000.0)

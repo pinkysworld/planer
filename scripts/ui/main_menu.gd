@@ -60,7 +60,7 @@ func _refresh_save_slots() -> void:
 func _load_slot(slot: int) -> void:
 	AudioManager.play_sfx("click")
 	if SaveManager.load_game(slot):
-		get_tree().change_scene_to_file("res://scenes/office_building.tscn")
+		get_tree().change_scene_to_file("res://scenes/office_building_planer.tscn")
 
 func _on_load_back_pressed() -> void:
 	AudioManager.play_sfx("click")

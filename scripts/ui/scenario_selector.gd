@@ -67,7 +67,7 @@ var scenarios: Dictionary = {
 func _start_scenario(scenario_key: String) -> void:
 	var scenario = scenarios.get(scenario_key, scenarios.freeplay)
 	GameManager.start_new_game(scenario)
-	get_tree().change_scene_to_file("res://scenes/office_building.tscn")
+	get_tree().change_scene_to_file("res://scenes/office_building_planer.tscn")
 
 func _on_freeplay_pressed() -> void:
 	AudioManager.play_sfx("click")
