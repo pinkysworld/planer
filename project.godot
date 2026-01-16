@@ -23,6 +23,13 @@ GameManager="*res://scripts/autoload/game_manager.gd"
 AudioManager="*res://scripts/autoload/audio_manager.gd"
 SaveManager="*res://scripts/autoload/save_manager.gd"
 EventBus="*res://scripts/autoload/event_bus.gd"
+MarketAI="*res://scripts/autoload/market_ai.gd"
+CompetitorAI="*res://scripts/autoload/competitor_ai.gd"
+RouteAI="*res://scripts/autoload/route_ai.gd"
+EmployeeAI="*res://scripts/autoload/employee_ai.gd"
+VisualEffects="*res://scripts/autoload/visual_effects.gd"
+InsuranceSystem="*res://scripts/autoload/insurance_system.gd"
+ResearchSystem="*res://scripts/autoload/research_system.gd"
 
 [display]
 

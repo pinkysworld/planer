@@ -4,20 +4,199 @@ A modern trucking business simulation game inspired by the classic "Der Planer" 
 
 ## Features
 
-### Business Simulation
-- **Contract Management**: Accept delivery contracts from various clients across Europe
+### Classic Planer Features (Authentic to Original Series)
+
+#### 📦 Comprehensive Truck System (28 Models)
+- **7 Manufacturers**: Mercedes-Benz, Volvo, Scania, MAN, DAF, Iveco, Renault
+- **4 Truck Classes**: Light (3.5t), Medium (12t), Heavy (18t), Semi (25-30t)
+- **Engine Types**: Diesel, Diesel Turbo, Electric, Hybrid, Hydrogen
+- **Detailed Specs**: Power (HP), fuel consumption, speed, reliability, comfort, maintenance costs
+- **Real Models**: Actros, FH16, S650, TGX, XF480, S-WAY, T High and more
+- **Vintage Trucks**: Classic restored models with collector value
+- **Running Costs Calculator**: Fuel, maintenance, insurance per truck
+
+#### 🏠 Family Life & Private Life Simulation
+- **Family Management**: Spouse and 2 children with happiness tracking
+- **Work-Life Balance**: Track stress, health, and time away from home
+- **Family Events**: Birthdays, anniversaries, school plays, vacations
+- **Relationship System**: Spouse happiness affects gameplay
+- **Home Ownership**: Buy homes from €150K to €500K+ with quality levels
+- **Vacation System**: Take family trips to reduce stress and increase happiness
+- **Life Milestones**: Marriage, children's achievements, retirement planning
+- **Consequences**: Neglect family = unhappy spouse, stressed player, poor performance
+
+#### 💎 Luxury Shop & Status System (40+ Items)
+- **Personal Vehicles**: VW Golf (€15K) to Rolls-Royce Ghost (€350K)
+- **Watches**: Casio (€50) to Patek Philippe (€35K)
+- **Jewelry**: Gold chains to diamond necklaces (€800-€15K)
+- **Electronics**: Laptops to smart home systems (€800-€8K)
+- **Hobbies**: Fishing, golf membership, sailing yacht, pilot license
+- **Home Decor**: Paintings, furniture, pool, wine cellar
+- **Fashion**: Designer suits and luxury wardrobe
+- **Experiences**: Spa weekends, cruises, private island vacations
+- **Social Status**: Each item boosts your status and family happiness
+- **Maintenance Costs**: Monthly upkeep for vehicles and luxury items
+
+#### 🌍 Multi-City Station System (22 European Cities)
+- **Open Stations**: Expand to Berlin, Paris, Amsterdam, Milan, Warsaw, and more
+- **Station Levels**: Small (3 trucks) → Regional (30 trucks)
+- **Regional Operations**: Assign trucks and employees to stations
+- **Profitability Tracking**: Monthly reports per station
+- **Market Factors**: Population, competition, market size affect profits
+- **Upgrades**: Expand station capacity for €25K-€60K
+- **5 Regions**: Central Europe, Western Europe, Southern Europe, Eastern Europe, Scandinavia
+- **Strategic Expansion**: Choose cities based on market opportunity
+
+#### 📦 Advanced Cargo System (24+ Cargo Types)
+- **8 Categories**: General, Perishable, Fragile, Hazardous, Valuable, Oversized, Temperature-Controlled, Express
+- **Detailed Requirements**:
+  - Refrigeration/Freezer for food
+  - HazMat license for chemicals
+  - Security for valuables
+  - Heavy vehicles for machinery
+  - Climate control for electronics
+- **Price Calculation**: Base rate × distance × weight × urgency × requirements
+- **Special Handling**: Temperature monitoring, careful loading, armed guards
+- **Risk Factors**: Damage probability and insurance costs per cargo type
+- **Regulatory Requirements**: Paperwork for hazardous materials
+
+### Intelligent Business Simulation
+- **Dynamic Market AI**: Real-time fuel price fluctuations, seasonal demand changes, and economic cycles (boom/recession)
+- **Contract Management**: Accept delivery contracts from various clients across Europe with dynamic pricing
+- **AI Competitors**: Compete against 5+ intelligent AI companies that bid on contracts, expand operations, and can go bankrupt
 - **Fleet Management**: Purchase, maintain, and sell trucks (diesel, electric, hydrogen)
-- **Employee Management**: Hire and manage drivers, mechanics, accountants, and more
-- **Route Planning**: Plan optimal routes between cities for maximum profit
+- **Smart Employee AI**: Employees with unique personalities, skill progression, life events (marriage, illness, burnout), morale management, and can request raises or quit
+- **Advanced Route Optimization**: AI-powered route planning with real-time traffic incidents, weather conditions (rain, snow, fog, storms), and seasonal effects
 - **Station Expansion**: Open stations in new cities across Central Europe, Scandinavia, and Southern Europe
-- **Financial Management**: Take loans, manage expenses, and grow your company
+- **Risk Management**: Comprehensive insurance system with 6 policy types, claims processing, and dynamic risk assessment
+- **Research & Development**: Unlock 20+ technologies including fuel efficiency, autonomous driving, electric/hydrogen infrastructure, and AI systems
+- **Financial Management**: Take loans, manage expenses, and grow your company with intelligent market forecasts
+
+### Advanced AI Systems
+- **Market Intelligence**: Economic state tracking, cargo demand fluctuations, competitor activity monitoring
+- **Weather Simulation**: Regional weather with 7 weather types affecting delivery speed and risk
+- **Traffic System**: Dynamic traffic incidents (accidents, construction, protests) with severity levels
+- **Employee Evolution**: Skill development, experience gain, personality traits affecting performance
+- **Competitor Strategies**: AI companies with different personalities (aggressive, cautious, specialist) and strategic decision-making
+
+### Enhanced Graphics & Effects (Steam Quality)
+- **Professional Glassmorphism UI**: Modern frosted-glass effects with smooth animations and gradients
+- **Advanced Shader System**:
+  - Ambient lighting shader with dynamic day/night transitions
+  - Bloom/glow effects for lights and highlights
+  - Weather overlay shader (rain, snow, fog with realistic particles)
+  - Post-processing effects (vignette, chromatic aberration, motion blur)
+- **Dynamic Day/Night Cycle**: Realistic lighting with dawn (orange/pink), day (bright), dusk (orange/red), night (blue)
+- **Professional HUD**:
+  - Glassmorphism design with frosted glass panels
+  - Smooth money counter animations
+  - Real-time reputation progress bars
+  - Notification system with queue management
+  - Live weather overlay effects
+  - Quick stats dashboard
+- **Visual Effects System**:
+  - Particle effects for success, money, warnings, smoke, sparkles
+  - Screen flashes (damage, success, info)
+  - Floating text with animations
+- **Weather Visualization**: Real-time rain, snow, fog with shader-based particle systems
+- **Camera Effects**:
+  - Screen shake (light, medium, heavy, extreme)
+  - Smooth zoom in/out
+  - Screen transitions (fade to black/white, crossfade, wipe)
+  - Cinematic letterbox mode
+- **Animation System**: Floating text, pulse effects, screen shake, fade in/out, smooth tweens
+
+### Professional Audio System
+- **Enhanced Audio Manager**:
+  - Dual music players for seamless crossfading
+  - Dynamic audio mixing and layering
+  - Adaptive music that responds to game state
+  - Audio ducking for important sounds
+  - SFX pooling system (16 simultaneous sounds)
+  - Ambient sound management with 4-layer system
+- **Comprehensive Sound Library**:
+  - UI sounds (click, hover, confirm, cancel, notifications)
+  - Office sounds (doors, footsteps, elevator, phone, keyboard, paper)
+  - Business sounds (money, contracts, deliveries, achievements)
+  - Vehicle sounds (truck start/idle/horn/brake)
+  - Ambient sounds (office, city, traffic)
+  - Weather sounds (rain, thunder, wind)
+- **Advanced Features**:
+  - Pitch variation for realistic sound effects
+  - Sound cooldowns to prevent spam
+  - Volume controls per audio bus (Master, Music, Ambient, SFX, UI)
+  - Smooth fade in/out transitions
+  - Settings persistence
+  - 3D audio simulation for 2D space
+
+### Professional Polish & Visual Quality
+- **Custom Shaders**: 4 professional GLSL shaders for lighting, effects, weather, and UI
+- **Glassmorphism UI Theme**: Complete theme resource with modern styling
+- **Smooth Animations**: Tween-based animations for all UI interactions
+- **Visual Feedback**: Every action has visual and audio feedback
+- **Performance Optimized**: Quality settings for different hardware
+- **Accessibility**: Colorblind-friendly UI with clear visual hierarchy
+
+### Engaging Gameplay & Fun Features
+- **Achievement System** (25+ achievements):
+  - Hidden achievements for discovery
+  - Unlockable titles, truck skins, office decorations
+  - Special cheat codes for 100% completion
+  - Progress tracking with rewards
+  - Categories: Business, Delivery, Fleet, Exploration, Mastery, Seasonal
+- **Story Events with Choices**:
+  - 15+ narrative events with meaningful decisions
+  - Branching consequences that affect gameplay
+  - Multi-part story arcs (office romance, mystery investor, celebrity partnerships)
+  - Moral dilemmas with reputation/money trade-offs
+  - Competitor interactions (mergers, sabotage, partnerships)
+  - Random quirky events (ghost trucks, food truck conversions)
+- **Daily & Weekly Challenges**:
+  - New daily challenge every day with rewards
+  - 3 weekly challenges for bigger rewards
+  - Streak bonuses (7-day streak = big bonus)
+  - Timed challenges (complete before noon)
+  - Difficulty scaling based on progression
+  - Special seasonal challenges
+- **7 Interactive Mini-Games**:
+  - **Loading Tetris**: Optimize cargo placement
+  - **Route Puzzle**: Plan efficient multi-stop routes
+  - **Negotiation**: Haggle for better contract prices
+  - **Truck Parking**: Precision parking challenges
+  - **Fuel Optimization**: Eco-driving for efficiency
+  - **Emergency Response**: Quick-time crisis management
+  - **Market Trading**: Buy/sell supplies for profit
+  - Highscore tracking and rewards
+- **Dynamic News System**:
+  - Daily news feed with humor and world-building
+  - Player milestones get news coverage
+  - Breaking news for major events
+  - Economic reports and market analysis
+  - Competitor news (bankruptcies, entries, scandals)
+  - Randomized news templates for variety
+  - Categories: Business, Economy, Weather, Technology, Scandal, Human Interest
+- **Progression & Unlockables**:
+  - Unlockable truck skins through achievements
+  - Office decorations for personalization
+  - Player titles to display
+  - Streak bonuses and combo rewards
+  - Milestone celebrations
+  - Hidden easter eggs and secrets
 
 ### Modern Updates (vs Original)
 - Email communication instead of fax
 - Modern truck models with electric and hydrogen options
-- Current fuel prices and regulations
-- Updated graphics while maintaining the classic pixel art style
-- GPS and route optimization technology
+- Dynamic fuel prices with market fluctuations
+- Advanced AI competitors and market simulation
+- Comprehensive insurance and risk management
+- Technology research tree with 20+ unlockable upgrades
+- Real-time weather and traffic simulation
+- Steam-quality graphics with shaders and particle effects
+- Professional glassmorphism UI design
+- Advanced audio system with dynamic mixing
+- Employee personality and life event simulation
+- GPS and AI-powered route optimization
+- Camera effects and cinematic transitions
 
 ### Private Life Simulation
 - Balance work with family life
