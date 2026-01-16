@@ -81,6 +81,52 @@ A modern trucking business simulation game inspired by the classic "Der Planer" 
 - **Performance Optimized**: Quality settings for different hardware
 - **Accessibility**: Colorblind-friendly UI with clear visual hierarchy
 
+### Engaging Gameplay & Fun Features
+- **Achievement System** (25+ achievements):
+  - Hidden achievements for discovery
+  - Unlockable titles, truck skins, office decorations
+  - Special cheat codes for 100% completion
+  - Progress tracking with rewards
+  - Categories: Business, Delivery, Fleet, Exploration, Mastery, Seasonal
+- **Story Events with Choices**:
+  - 15+ narrative events with meaningful decisions
+  - Branching consequences that affect gameplay
+  - Multi-part story arcs (office romance, mystery investor, celebrity partnerships)
+  - Moral dilemmas with reputation/money trade-offs
+  - Competitor interactions (mergers, sabotage, partnerships)
+  - Random quirky events (ghost trucks, food truck conversions)
+- **Daily & Weekly Challenges**:
+  - New daily challenge every day with rewards
+  - 3 weekly challenges for bigger rewards
+  - Streak bonuses (7-day streak = big bonus)
+  - Timed challenges (complete before noon)
+  - Difficulty scaling based on progression
+  - Special seasonal challenges
+- **7 Interactive Mini-Games**:
+  - **Loading Tetris**: Optimize cargo placement
+  - **Route Puzzle**: Plan efficient multi-stop routes
+  - **Negotiation**: Haggle for better contract prices
+  - **Truck Parking**: Precision parking challenges
+  - **Fuel Optimization**: Eco-driving for efficiency
+  - **Emergency Response**: Quick-time crisis management
+  - **Market Trading**: Buy/sell supplies for profit
+  - Highscore tracking and rewards
+- **Dynamic News System**:
+  - Daily news feed with humor and world-building
+  - Player milestones get news coverage
+  - Breaking news for major events
+  - Economic reports and market analysis
+  - Competitor news (bankruptcies, entries, scandals)
+  - Randomized news templates for variety
+  - Categories: Business, Economy, Weather, Technology, Scandal, Human Interest
+- **Progression & Unlockables**:
+  - Unlockable truck skins through achievements
+  - Office decorations for personalization
+  - Player titles to display
+  - Streak bonuses and combo rewards
+  - Milestone celebrations
+  - Hidden easter eggs and secrets
+
 ### Modern Updates (vs Original)
 - Email communication instead of fax
 - Modern truck models with electric and hydrogen options
