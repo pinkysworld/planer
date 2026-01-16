@@ -158,8 +158,8 @@ func _create_retirement_dialog() -> Control:
 	)
 	vbox.add_child(btn)
 
-	var center_btn = Control.new()
-	center_btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	var center_btn = CenterContainer.new()
+	center_btn.size_flags_horizontal = Control.SIZE_FILL
 	btn.reparent(center_btn)
 	vbox.add_child(center_btn)
 
