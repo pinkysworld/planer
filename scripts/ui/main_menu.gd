@@ -75,8 +75,20 @@ func _load_current_settings() -> void:
 	$SettingsPanel/Panel/VBox/SFXHBox/SFXSlider.value = settings.sfx_volume
 	$SettingsPanel/Panel/VBox/SFXHBox/SFXToggle.button_pressed = settings.sfx_enabled
 
-	var is_fullscreen = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
-	$SettingsPanel/Panel/VBox/FullscreenHBox/FullscreenToggle.button_pressed = is_fullscreen
+	# Load fullscreen and resolution settings from SettingsManager
+	$SettingsPanel/Panel/VBox/FullscreenHBox/FullscreenToggle.button_pressed = SettingsManager.is_fullscreen
+
+	# Update resolution option button if it exists
+	var res_option = $SettingsPanel/Panel/VBox/ResolutionHBox/ResolutionOption
+	if res_option:
+		res_option.clear()
+		var current_index = 0
+		for i in range(SettingsManager.RESOLUTIONS.size()):
+			var res = SettingsManager.RESOLUTIONS[i]
+			res_option.add_item(SettingsManager.get_resolution_string(res))
+			if res == SettingsManager.current_resolution:
+				current_index = i
+		res_option.select(current_index)
 
 func _on_music_volume_changed(value: float) -> void:
 	AudioManager.set_music_volume(value)
@@ -91,10 +103,11 @@ func _on_sfx_toggled(enabled: bool) -> void:
 	AudioManager.set_sfx_enabled(enabled)
 
 func _on_fullscreen_toggled(enabled: bool) -> void:
-	if enabled:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	SettingsManager.set_fullscreen(enabled)
+
+func _on_resolution_selected(index: int) -> void:
+	var resolution = SettingsManager.RESOLUTIONS[index]
+	SettingsManager.set_resolution(resolution.x, resolution.y)
 
 func _on_settings_back_pressed() -> void:
 	AudioManager.play_sfx("click")
