@@ -41,18 +41,41 @@ func _physics_process(delta: float) -> void:
 			# Reached target
 			is_moving_to_target = false
 			velocity.x = 0
+			# Stop walking animation
+			if has_node("AnimatedSprite2D"):
+				get_node("AnimatedSprite2D").animation = "idle"
 		else:
 			# Move towards target
 			direction = sign(target_position.x - global_position.x)
 			facing_direction = int(direction)
+			# Play walking animation
+			if has_node("AnimatedSprite2D"):
+				var anim_sprite = get_node("AnimatedSprite2D")
+				if anim_sprite.animation != "walk":
+					anim_sprite.animation = "walk"
+					anim_sprite.play()
 	else:
 		# Keyboard controls (backup method)
 		if Input.is_action_pressed("move_left"):
 			direction = -1.0
 			facing_direction = -1
+			if has_node("AnimatedSprite2D"):
+				var anim_sprite = get_node("AnimatedSprite2D")
+				if anim_sprite.animation != "walk":
+					anim_sprite.animation = "walk"
+					anim_sprite.play()
 		elif Input.is_action_pressed("move_right"):
 			direction = 1.0
 			facing_direction = 1
+			if has_node("AnimatedSprite2D"):
+				var anim_sprite = get_node("AnimatedSprite2D")
+				if anim_sprite.animation != "walk":
+					anim_sprite.animation = "walk"
+					anim_sprite.play()
+		else:
+			# Not moving - idle animation
+			if has_node("AnimatedSprite2D"):
+				get_node("AnimatedSprite2D").animation = "idle"
 
 	velocity.x = direction * speed
 
@@ -63,7 +86,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	# Clamp position to building bounds
-	global_position.x = clamp(global_position.x, 80, 1180)
+	global_position.x = clamp(global_position.x, 80, 1200)
 
 func _input(event: InputEvent) -> void:
 	if GameManager.is_paused:
