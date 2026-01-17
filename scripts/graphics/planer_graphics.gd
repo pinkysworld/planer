@@ -3,6 +3,8 @@ extends Node2D
 
 class_name PlanerGraphics
 
+const PhotorealisticGraphics = preload("res://scripts/graphics/photorealistic_graphics.gd")
+
 # Color palette - Authentic Der Planer colors from screenshots
 const WALL_COLOR: Color = Color(0.72, 0.75, 0.78)  # Light gray concrete
 const WALL_SHADOW: Color = Color(0.52, 0.55, 0.58)

@@ -245,10 +245,8 @@ func _update_mission_time() -> void:
 		var total_minutes = GameManager.current_day * 24 * 60 + GameManager.current_hour * 60 + GameManager.current_minute
 		var hours = int(total_minutes / 60)
 		var minutes = int(total_minutes % 60)
-		# Get seconds from time (or use 0 if not available)
+		# Use fixed seconds value since GameManager doesn't track seconds
 		var seconds = 0
-		if GameManager.has("current_second"):
-			seconds = GameManager.current_second
 		mission_time_display.text = "%02d:%02d:%02d" % [hours % 100, minutes, seconds]
 
 func _update_money(_company_money: float = 0.0, _private_money: float = 0.0) -> void:
