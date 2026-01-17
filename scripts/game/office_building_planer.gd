@@ -382,17 +382,29 @@ func _show_simple_room_dialog(room_name: String, room_data: Dictionary) -> void:
 
 	var panel = Panel.new()
 	panel.set_anchors_preset(Control.PRESET_CENTER)
-	panel.offset_left = -300
-	panel.offset_right = 300
-	panel.offset_top = -200
-	panel.offset_bottom = 200
+	panel.offset_left = -400
+	panel.offset_right = 400
+	panel.offset_top = -280
+	panel.offset_bottom = 280
 	dialog.add_child(panel)
+
+	# Add navigation bar at top
+	var nav_bar = _create_navigation_bar()
+	nav_bar.position = Vector2(0, 0)
+	panel.add_child(nav_bar)
+
+	# Connect navigation signals
+	nav_bar.get_node("CloseBtn").pressed.connect(func(): _close_dialog(dialog))
+	nav_bar.get_node("LaptopBtn").pressed.connect(func(): _nav_to_room("Room_Office", dialog))
+	nav_bar.get_node("MoneyBtn").pressed.connect(func(): _nav_to_room("Room_Accounting", dialog))
+	nav_bar.get_node("StatsBtn").pressed.connect(func(): _nav_to_room("Room_Statistics", dialog))
+	nav_bar.get_node("EmailBtn").pressed.connect(func(): _nav_to_room("Room_Email", dialog))
 
 	var vbox = VBoxContainer.new()
 	vbox.set_anchors_preset(Control.PRESET_FULL_RECT)
 	vbox.offset_left = 20
 	vbox.offset_right = -20
-	vbox.offset_top = 20
+	vbox.offset_top = 60  # Leave space for nav bar
 	vbox.offset_bottom = -20
 	vbox.add_theme_constant_override("separation", 15)
 	panel.add_child(vbox)
@@ -437,17 +449,29 @@ func _show_elevator_dialog() -> void:
 
 	var panel = Panel.new()
 	panel.set_anchors_preset(Control.PRESET_CENTER)
-	panel.offset_left = -150
-	panel.offset_right = 150
-	panel.offset_top = -200
-	panel.offset_bottom = 200
+	panel.offset_left = -250
+	panel.offset_right = 250
+	panel.offset_top = -240
+	panel.offset_bottom = 240
 	dialog.add_child(panel)
+
+	# Add navigation bar at top
+	var nav_bar = _create_navigation_bar()
+	nav_bar.position = Vector2(0, 0)
+	panel.add_child(nav_bar)
+
+	# Connect navigation signals
+	nav_bar.get_node("CloseBtn").pressed.connect(func(): _close_dialog(dialog))
+	nav_bar.get_node("LaptopBtn").pressed.connect(func(): _nav_to_room("Room_Office", dialog))
+	nav_bar.get_node("MoneyBtn").pressed.connect(func(): _nav_to_room("Room_Accounting", dialog))
+	nav_bar.get_node("StatsBtn").pressed.connect(func(): _nav_to_room("Room_Statistics", dialog))
+	nav_bar.get_node("EmailBtn").pressed.connect(func(): _nav_to_room("Room_Email", dialog))
 
 	var vbox = VBoxContainer.new()
 	vbox.set_anchors_preset(Control.PRESET_FULL_RECT)
 	vbox.offset_left = 15
 	vbox.offset_right = -15
-	vbox.offset_top = 15
+	vbox.offset_top = 60  # Leave space for nav bar
 	vbox.offset_bottom = -15
 	vbox.add_theme_constant_override("separation", 10)
 	panel.add_child(vbox)
@@ -485,6 +509,80 @@ func _on_floor_selected(floor_num: int, dialog: Control) -> void:
 	if floor_num != current_floor:
 		AudioManager.play_sfx("elevator")
 		_change_to_floor(floor_num)
+
+func _create_navigation_bar() -> Control:
+	var nav_container = Control.new()
+	nav_container.custom_minimum_size = Vector2(800, 50)
+
+	# Background bar
+	var bg = ColorRect.new()
+	bg.size = Vector2(800, 50)
+	bg.color = Color(0.18, 0.22, 0.28, 0.98)
+	nav_container.add_child(bg)
+
+	# Navigation buttons container
+	var hbox = HBoxContainer.new()
+	hbox.position = Vector2(10, 8)
+	hbox.add_theme_constant_override("separation", 10)
+	nav_container.add_child(hbox)
+
+	# Laptop/Computer button
+	var laptop_btn = _create_nav_icon_button("COMPUTER", Color(0.5, 0.7, 0.95))
+	laptop_btn.name = "LaptopBtn"
+	hbox.add_child(laptop_btn)
+
+	# Money button
+	var money_btn = _create_nav_icon_button("MONEY", Color(0.3, 0.9, 0.5))
+	money_btn.name = "MoneyBtn"
+	hbox.add_child(money_btn)
+
+	# Statistics button
+	var stats_btn = _create_nav_icon_button("STATS", Color(0.95, 0.75, 0.35))
+	stats_btn.name = "StatsBtn"
+	hbox.add_child(stats_btn)
+
+	# Email button
+	var email_btn = _create_nav_icon_button("EMAIL", Color(0.95, 0.5, 0.5))
+	email_btn.name = "EmailBtn"
+	hbox.add_child(email_btn)
+
+	# Spacer
+	var spacer = Control.new()
+	spacer.custom_minimum_size = Vector2(300, 1)
+	hbox.add_child(spacer)
+
+	# Close button
+	var close_btn = _create_nav_icon_button("CLOSE", Color(1, 0.4, 0.4))
+	close_btn.name = "CloseBtn"
+	hbox.add_child(close_btn)
+
+	return nav_container
+
+func _create_nav_icon_button(label_text: String, icon_color: Color) -> Button:
+	var btn = Button.new()
+	btn.custom_minimum_size = Vector2(70, 34)
+
+	# Simple styled button with colored background
+	var style = StyleBoxFlat.new()
+	style.bg_color = icon_color
+	style.border_color = Color(0, 0, 0)
+	style.border_width_left = 1
+	style.border_width_right = 1
+	style.border_width_top = 1
+	style.border_width_bottom = 1
+
+	btn.text = label_text
+	btn.add_theme_font_size_override("font_size", 10)
+	btn.add_theme_color_override("font_color", Color(0, 0, 0))
+	btn.add_theme_color_override("font_hover_color", Color(1, 1, 1))
+
+	return btn
+
+func _nav_to_room(room_name: String, current_dialog: Control) -> void:
+	AudioManager.play_sfx("click")
+	_close_dialog(current_dialog)
+	if rooms.has(room_name):
+		_enter_room(room_name)
 
 func _close_dialog(dialog: Control) -> void:
 	AudioManager.play_sfx("door_close")
