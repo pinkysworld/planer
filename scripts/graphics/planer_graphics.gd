@@ -3,48 +3,91 @@ extends Node2D
 
 class_name PlanerGraphics
 
-# Color palette - Classic Der Planer colors
-const WALL_COLOR: Color = Color(0.5, 0.6, 0.7)
-const FLOOR_COLOR: Color = Color(0.4, 0.45, 0.5)
-const DOOR_FRAME: Color = Color(0.3, 0.35, 0.4)
-const DOOR_COLOR: Color = Color(0.55, 0.7, 0.85)
-const WINDOW_COLOR: Color = Color(0.2, 0.3, 0.4)
-const HIGHLIGHT: Color = Color(0.7, 0.8, 0.9)
-const SHADOW: Color = Color(0.2, 0.25, 0.3)
+# Color palette - Authentic Der Planer colors from screenshots
+const WALL_COLOR: Color = Color(0.72, 0.75, 0.78)  # Light gray concrete
+const WALL_SHADOW: Color = Color(0.52, 0.55, 0.58)
+const FLOOR_COLOR: Color = Color(0.48, 0.52, 0.56)  # Gray floor
+const DOOR_FRAME: Color = Color(0.25, 0.28, 0.32)
+const DOOR_COLOR: Color = Color(0.45, 0.68, 0.82)  # Cyan door panels
+const DOOR_HIGHLIGHT: Color = Color(0.65, 0.85, 0.95)
+const WINDOW_COLOR: Color = Color(0.15, 0.22, 0.30)
+const WINDOW_GLASS: Color = Color(0.35, 0.52, 0.68)
+const HIGHLIGHT: Color = Color(0.85, 0.90, 0.95)
+const SHADOW: Color = Color(0.18, 0.20, 0.24)
 
-## Creates a door sprite with Der Planer style
+## Creates a door sprite with authentic Der Planer style
 static func create_door_sprite() -> Sprite2D:
 	var sprite = Sprite2D.new()
 	var img = Image.create(32, 64, false, Image.FORMAT_RGBA8)
 
-	# Fill with door frame
+	# Fill with dark door frame
 	img.fill(DOOR_FRAME)
 
-	# Main door panel (inset)
-	for y in range(2, 62):
-		for x in range(2, 30):
-			img.set_pixel(x, y, DOOR_COLOR)
+	# Main door panel with gradient effect
+	for y in range(3, 61):
+		for x in range(3, 29):
+			# Vertical gradient for 3D effect
+			var gradient = 1.0 - (float(y - 3) / 58.0) * 0.15
+			var door_shade = Color(
+				DOOR_COLOR.r * gradient,
+				DOOR_COLOR.g * gradient,
+				DOOR_COLOR.b * gradient
+			)
+			img.set_pixel(x, y, door_shade)
 
-	# Door window (upper part)
-	for y in range(8, 24):
-		for x in range(8, 24):
+	# Door window (upper third) - rounded corners
+	for y in range(8, 28):
+		for x in range(7, 25):
+			# Skip corners for rounded effect
+			if (y < 10 and (x < 9 or x > 22)) or (y > 25 and (x < 9 or x > 22)):
+				continue
 			img.set_pixel(x, y, WINDOW_COLOR)
 
-	# Window highlight
-	for y in range(8, 10):
+	# Window glass reflection (top)
+	for y in range(9, 14):
 		for x in range(8, 24):
-			img.set_pixel(x, y, HIGHLIGHT)
+			var alpha = (14 - y) / 5.0
+			img.set_pixel(x, y, WINDOW_GLASS.lerp(HIGHLIGHT, alpha * 0.6))
 
-	# Door handle
-	for y in range(32, 36):
-		for x in range(24, 28):
-			img.set_pixel(x, y, Color(0.8, 0.7, 0.3))
+	# Door panels (decorative rectangles)
+	# Upper panel
+	for y in range(32, 38):
+		for x in range(7, 25):
+			if x == 7 or x == 24 or y == 32 or y == 37:
+				img.set_pixel(x, y, SHADOW)
+			else:
+				img.set_pixel(x, y, DOOR_HIGHLIGHT)
 
-	# Shadows
-	for y in range(2, 62):
-		img.set_pixel(29, y, SHADOW)
-	for x in range(2, 30):
-		img.set_pixel(x, 61, SHADOW)
+	# Lower panel
+	for y in range(42, 48):
+		for x in range(7, 25):
+			if x == 7 or x == 24 or y == 42 or y == 47:
+				img.set_pixel(x, y, SHADOW)
+			else:
+				img.set_pixel(x, y, DOOR_HIGHLIGHT)
+
+	# Door handle (brass/gold colored)
+	var handle_color = Color(0.85, 0.75, 0.35)
+	for y in range(30, 35):
+		for x in range(25, 28):
+			img.set_pixel(x, y, handle_color)
+	# Handle highlight
+	img.set_pixel(25, 30, Color(1, 0.95, 0.7))
+	img.set_pixel(25, 31, Color(1, 0.95, 0.7))
+
+	# Right and bottom shadows for 3D depth
+	for y in range(3, 61):
+		img.set_pixel(28, y, SHADOW)
+		img.set_pixel(27, y, SHADOW.lerp(DOOR_COLOR, 0.5))
+	for x in range(3, 29):
+		img.set_pixel(x, 60, SHADOW)
+		img.set_pixel(x, 59, SHADOW.lerp(DOOR_COLOR, 0.5))
+
+	# Left and top highlights
+	for y in range(3, 61):
+		img.set_pixel(3, y, DOOR_HIGHLIGHT)
+	for x in range(3, 29):
+		img.set_pixel(x, 3, DOOR_HIGHLIGHT)
 
 	var texture = ImageTexture.create_from_image(img)
 	sprite.texture = texture
@@ -52,18 +95,39 @@ static func create_door_sprite() -> Sprite2D:
 
 	return sprite
 
-## Creates a wall section
+## Creates a wall section with realistic texture
 static func create_wall_texture(width: int, height: int) -> Sprite2D:
 	var sprite = Sprite2D.new()
 	var img = Image.create(width, height, false, Image.FORMAT_RGBA8)
 
+	# Base wall color
 	img.fill(WALL_COLOR)
 
-	# Add some texture variation
-	for y in range(0, height, 8):
-		for x in range(0, width, 8):
-			if (x + y) % 16 == 0:
-				img.set_pixel(x, y, Color(WALL_COLOR.r * 0.95, WALL_COLOR.g * 0.95, WALL_COLOR.b * 0.95))
+	# Create concrete/plaster texture with subtle noise
+	for y in range(height):
+		for x in range(width):
+			# Add subtle random variation
+			var noise_val = (hash(Vector2i(x / 4, y / 4)) % 20) / 200.0
+			var textured = Color(
+				WALL_COLOR.r + noise_val - 0.05,
+				WALL_COLOR.g + noise_val - 0.05,
+				WALL_COLOR.b + noise_val - 0.05
+			)
+			img.set_pixel(x, y, textured)
+
+	# Add horizontal lines for wall panels
+	for y in range(0, height, 60):
+		for x in range(width):
+			if y < height:
+				img.set_pixel(x, y, WALL_SHADOW)
+				if y + 1 < height:
+					img.set_pixel(x, y + 1, WALL_COLOR.lightened(0.1))
+
+	# Add subtle vertical divisions
+	for x in range(0, width, 80):
+		for y in range(height):
+			if x < width:
+				img.set_pixel(x, y, WALL_SHADOW.lerp(WALL_COLOR, 0.7))
 
 	var texture = ImageTexture.create_from_image(img)
 	sprite.texture = texture
@@ -71,22 +135,41 @@ static func create_wall_texture(width: int, height: int) -> Sprite2D:
 
 	return sprite
 
-## Creates a floor texture
+## Creates a floor texture with tile pattern
 static func create_floor_texture(width: int, height: int) -> Sprite2D:
 	var sprite = Sprite2D.new()
 	var img = Image.create(width, height, false, Image.FORMAT_RGBA8)
 
+	# Base floor color
 	img.fill(FLOOR_COLOR)
 
-	# Tile pattern
-	for y in range(0, height, 16):
-		for x in range(0, width, 16):
-			# Tile lines
-			for i in range(width):
-				img.set_pixel(i, y, SHADOW)
-			for i in range(height):
-				if i < height:
-					img.set_pixel(x, i, SHADOW)
+	# Create tiles with grout lines
+	var tile_size = 32
+	for tile_y in range(0, height, tile_size):
+		for tile_x in range(0, width, tile_size):
+			# Draw each tile with subtle variation
+			for y in range(tile_y + 1, min(tile_y + tile_size - 1, height)):
+				for x in range(tile_x + 1, min(tile_x + tile_size - 1, width)):
+					# Add slight variation to each tile
+					var var_val = (hash(Vector2i(tile_x / tile_size, tile_y / tile_size)) % 15) / 300.0
+					var tile_color = Color(
+						FLOOR_COLOR.r + var_val,
+						FLOOR_COLOR.g + var_val,
+						FLOOR_COLOR.b + var_val
+					)
+					img.set_pixel(x, y, tile_color)
+
+					# Add subtle highlight on left/top of tile
+					if x == tile_x + 1 or y == tile_y + 1:
+						img.set_pixel(x, y, tile_color.lightened(0.08))
+
+			# Draw grout lines (darker)
+			for y in range(tile_y, min(tile_y + tile_size, height)):
+				if tile_x < width:
+					img.set_pixel(tile_x, y, SHADOW)
+			for x in range(tile_x, min(tile_x + tile_size, width)):
+				if tile_y < height:
+					img.set_pixel(x, tile_y, SHADOW)
 
 	var texture = ImageTexture.create_from_image(img)
 	sprite.texture = texture

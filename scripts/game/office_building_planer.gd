@@ -293,8 +293,8 @@ func _setup_player() -> void:
 	player.set_script(script)
 
 func _setup_hud() -> void:
-	# Load the retro Der Planer HUD
-	var hud_script = load("res://scripts/ui/retro_game_hud.gd")
+	# Load the authentic Der Planer HUD
+	var hud_script = load("res://scripts/ui/authentic_planer_hud.gd")
 	game_hud = CanvasLayer.new()
 	game_hud.set_script(hud_script)
 	add_child(game_hud)
