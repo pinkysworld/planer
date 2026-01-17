@@ -1,6 +1,7 @@
 extends CanvasLayer
 ## LoadingScreen - Professional loading screen with progress bar
 
+@onready var root: Control
 @onready var progress_bar: ProgressBar
 @onready var tip_label: Label
 @onready var spinner: Control
@@ -23,11 +24,15 @@ func _ready() -> void:
 	_start_spinner_animation()
 
 func _create_loading_screen() -> void:
+	root = Control.new()
+	root.set_anchors_preset(Control.PRESET_FULL_RECT)
+	add_child(root)
+
 	# Background
 	var bg = ColorRect.new()
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	bg.color = Color(0.1, 0.12, 0.15)
-	add_child(bg)
+	root.add_child(bg)
 
 	# Logo/Title
 	var title = Label.new()
@@ -39,7 +44,7 @@ func _create_loading_screen() -> void:
 	title.offset_top = 150
 	title.offset_left = -300
 	title.offset_right = 300
-	add_child(title)
+	root.add_child(title)
 
 	# Spinner
 	spinner = Control.new()
@@ -48,7 +53,7 @@ func _create_loading_screen() -> void:
 	spinner.offset_right = 32
 	spinner.offset_top = -32
 	spinner.offset_bottom = 32
-	add_child(spinner)
+	root.add_child(spinner)
 
 	for i in range(8):
 		var dot = ColorRect.new()
@@ -66,7 +71,7 @@ func _create_loading_screen() -> void:
 	progress_container.offset_top = -150
 	progress_container.offset_bottom = -50
 	progress_container.add_theme_constant_override("separation", 15)
-	add_child(progress_container)
+	root.add_child(progress_container)
 
 	# Progress bar
 	progress_bar = ProgressBar.new()
@@ -104,12 +109,16 @@ func set_progress(value: float) -> void:
 		progress_bar.value = value
 
 func show_loading() -> void:
-	show()
-	modulate.a = 0
+	if not root:
+		return
+	root.show()
+	root.modulate.a = 0
 	var tween = create_tween()
-	tween.tween_property(self, "modulate:a", 1.0, 0.3)
+	tween.tween_property(root, "modulate:a", 1.0, 0.3)
 
 func hide_loading() -> void:
+	if not root:
+		return
 	var tween = create_tween()
-	tween.tween_property(self, "modulate:a", 0.0, 0.3)
-	tween.tween_callback(hide)
+	tween.tween_property(root, "modulate:a", 0.0, 0.3)
+	tween.tween_callback(root.hide)
