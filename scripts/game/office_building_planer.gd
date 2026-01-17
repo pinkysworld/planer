@@ -76,29 +76,25 @@ func _create_floor(floor_num: int) -> Node2D:
 	var bg = ColorRect.new()
 	bg.size = Vector2(1280, 720)
 	bg.position = Vector2(0, 0)
-	bg.color = Color(0.4, 0.5, 0.65)
+	bg.color = Color(0.2, 0.25, 0.35)
 	floor_container.add_child(bg)
 
 	# Corridor wall (concrete texture)
-	var wall = EnhancedGraphics.create_textured_wall_with_bitmaps(1280, 180)
+	var wall = PlanerGraphics.create_wall_texture(1280, 180)
+	wall.centered = false
 	wall.position = Vector2(0, 440)
 	floor_container.add_child(wall)
 
 	# Tiled floor (different for each floor type)
-	var floor_graphic: Control
-	if floor_num == 3:  # Top floor - marble
-		floor_graphic = EnhancedGraphics.create_marble_floor(1280)
-	elif floor_num == 2:  # Office floor - carpet
-		floor_graphic = EnhancedGraphics.create_carpet(1280, 80)
-	else:  # Lower floors - ceramic tiles
-		floor_graphic = EnhancedGraphics.create_tiled_floor(1280)
-
+	var floor_graphic = PlanerGraphics.create_floor_texture(1280, 80)
+	floor_graphic.centered = false
 	floor_graphic.position = Vector2(0, 620)
 	floor_container.add_child(floor_graphic)
 
 	# Detailed windows in background
 	for i in range(4):
-		var window = EnhancedGraphics.create_detailed_window()
+		var window = PlanerGraphics.create_window_sprite()
+		window.centered = false
 		window.position = Vector2(200 + i * 250, 470)
 		floor_container.add_child(window)
 
@@ -186,32 +182,28 @@ func _create_room_door(room_name: String, label: String) -> Node2D:
 	var room = Node2D.new()
 	room.name = room_name
 
-	# Textured door graphic with real wood and metal
-	var door_graphic = EnhancedGraphics.create_textured_door()
+	# Classic Der Planer door graphic
+	var door_graphic = PlanerGraphics.create_door_sprite()
 	door_graphic.name = "Door"
+	door_graphic.centered = false
+	door_graphic.scale = Vector2(1.5, 1.5)
 	room.add_child(door_graphic)
 
-	# Room label with better visibility
-	var label_bg = ColorRect.new()
-	label_bg.position = Vector2(-15, -22)
-	label_bg.size = Vector2(78, 18)
-	label_bg.color = Color(0, 0, 0, 0.7)
-	room.add_child(label_bg)
-
-	var label_node = Label.new()
-	label_node.text = label
-	label_node.position = Vector2(-10, -20)
-	label_node.add_theme_font_size_override("font_size", 11)
-	label_node.add_theme_color_override("font_color", Color(1, 1, 0.9))
-	room.add_child(label_node)
+	# Room sign in Planer 2 style
+	var sign = PlanerGraphics.create_room_sign(label)
+	sign.centered = false
+	sign.position = Vector2(-8, -22)
+	room.add_child(sign)
 
 	# Interaction area
 	var area = Area2D.new()
 	area.name = "InteractionArea"
+	area.collision_layer = 1
+	area.collision_mask = 1
 	room.add_child(area)
 
 	var shape = RectangleShape2D.new()
-	shape.size = Vector2(60, 100)
+	shape.size = Vector2(48, 96)
 	var collision = CollisionShape2D.new()
 	collision.shape = shape
 	collision.position = Vector2(24, 48)
@@ -230,24 +222,11 @@ func _add_elevator_to_floor(floor_container: Node2D) -> void:
 	elevator.position = Vector2(1180, 530)
 	floor_container.add_child(elevator)
 
-	# Elevator frame
-	var frame = ColorRect.new()
-	frame.size = Vector2(72, 110)
-	frame.color = Color(0.25, 0.3, 0.35)
-	elevator.add_child(frame)
-
-	# Doors
-	var left_door = ColorRect.new()
-	left_door.size = Vector2(30, 100)
-	left_door.position = Vector2(5, 5)
-	left_door.color = Color(0.65, 0.7, 0.75)
-	elevator.add_child(left_door)
-
-	var right_door = ColorRect.new()
-	right_door.size = Vector2(30, 100)
-	right_door.position = Vector2(37, 5)
-	right_door.color = Color(0.65, 0.7, 0.75)
-	elevator.add_child(right_door)
+	# Elevator sprite
+	var elevator_sprite = PlanerGraphics.create_elevator_sprite()
+	elevator_sprite.centered = false
+	elevator_sprite.scale = Vector2(1.5, 1.5)
+	elevator.add_child(elevator_sprite)
 
 	# Label
 	var label_node = Label.new()
@@ -260,10 +239,12 @@ func _add_elevator_to_floor(floor_container: Node2D) -> void:
 	# Interaction area
 	var area = Area2D.new()
 	area.name = "InteractionArea"
+	area.collision_layer = 1
+	area.collision_mask = 1
 	elevator.add_child(area)
 
 	var shape = RectangleShape2D.new()
-	shape.size = Vector2(80, 115)
+	shape.size = Vector2(72, 110)
 	var collision = CollisionShape2D.new()
 	collision.shape = shape
 	collision.position = Vector2(36, 55)
@@ -291,6 +272,21 @@ func _setup_player() -> void:
 	shape.size = Vector2(20, 30)
 	collision.shape = shape
 	player.add_child(collision)
+
+	# Interaction area for keyboard entry
+	var interaction_area = Area2D.new()
+	interaction_area.name = "InteractionArea"
+	interaction_area.monitoring = true
+	interaction_area.collision_layer = 1
+	interaction_area.collision_mask = 1
+	player.add_child(interaction_area)
+
+	var interaction_shape = RectangleShape2D.new()
+	interaction_shape.size = Vector2(90, 70)
+	var interaction_collision = CollisionShape2D.new()
+	interaction_collision.shape = interaction_shape
+	interaction_collision.position = Vector2(0, -10)
+	interaction_area.add_child(interaction_collision)
 
 	# Add script
 	var script = load("res://scripts/game/player_character.gd")
