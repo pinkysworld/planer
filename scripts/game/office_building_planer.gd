@@ -5,6 +5,7 @@ signal room_entered(room_name: String)
 signal floor_changed(floor_number: int)
 
 const PlanerGraphics = preload("res://scripts/graphics/planer_graphics.gd")
+const EnhancedGraphics = preload("res://scripts/graphics/enhanced_graphics.gd")
 
 var rooms: Dictionary = {
 	"Room_Garage": {"name": "Garage", "floor": 0, "description": "Manage and repair your truck fleet"},
@@ -71,39 +72,27 @@ func _create_floor(floor_num: int) -> Node2D:
 	floor_container.name = "Floor%d" % floor_num
 	floor_container.visible = (floor_num == current_floor)
 
-	# Background - solid color
+	# Background - gradient sky
 	var bg = ColorRect.new()
 	bg.size = Vector2(1280, 720)
 	bg.position = Vector2(0, 0)
-	bg.color = Color(0.3, 0.35, 0.4)
+	bg.color = Color(0.4, 0.5, 0.65)
 	floor_container.add_child(bg)
 
-	# Corridor background
-	var corridor_bg = ColorRect.new()
-	corridor_bg.size = Vector2(1280, 180)
-	corridor_bg.position = Vector2(0, 440)
-	corridor_bg.color = Color(0.5, 0.6, 0.7)
-	floor_container.add_child(corridor_bg)
+	# Corridor wall (textured)
+	var wall = EnhancedGraphics.create_textured_wall(1280, 180)
+	wall.position = Vector2(0, 440)
+	floor_container.add_child(wall)
 
-	# Floor
-	var floor_rect = ColorRect.new()
-	floor_rect.size = Vector2(1280, 80)
-	floor_rect.position = Vector2(0, 620)
-	floor_rect.color = Color(0.4, 0.45, 0.5)
-	floor_container.add_child(floor_rect)
+	# Textured floor
+	var floor_graphic = EnhancedGraphics.create_textured_floor(1280)
+	floor_graphic.position = Vector2(0, 620)
+	floor_container.add_child(floor_graphic)
 
-	# Floor tiles pattern
-	for x in range(0, 1280, 32):
-		var tile_line = ColorRect.new()
-		tile_line.size = Vector2(2, 80)
-		tile_line.position = Vector2(x, 620)
-		tile_line.color = Color(0.3, 0.35, 0.4)
-		floor_container.add_child(tile_line)
-
-	# Windows in background
+	# Detailed windows in background
 	for i in range(4):
-		var window = _create_simple_window()
-		window.position = Vector2(200 + i * 250, 480)
+		var window = EnhancedGraphics.create_detailed_window()
+		window.position = Vector2(200 + i * 250, 470)
 		floor_container.add_child(window)
 
 	# Add rooms based on floor
@@ -111,6 +100,12 @@ func _create_floor(floor_num: int) -> Node2D:
 
 	# Add elevator
 	_add_elevator_to_floor(floor_container)
+
+	# Add some office furniture for detail
+	if floor_num == 2:  # Office floor
+		var desk = EnhancedGraphics.create_office_desk()
+		desk.position = Vector2(100, 550)
+		floor_container.add_child(desk)
 
 	return floor_container
 
@@ -176,40 +171,19 @@ func _create_room_door(room_name: String, label: String) -> Node2D:
 	var room = Node2D.new()
 	room.name = room_name
 
-	# Door frame
-	var frame = ColorRect.new()
-	frame.size = Vector2(48, 96)
-	frame.color = Color(0.3, 0.35, 0.4)
-	room.add_child(frame)
-
-	# Door panel
-	var door = ColorRect.new()
-	door.name = "Door"
-	door.size = Vector2(42, 90)
-	door.position = Vector2(3, 3)
-	door.color = Color(0.55, 0.7, 0.85)
-	room.add_child(door)
-
-	# Door window
-	var window = ColorRect.new()
-	window.size = Vector2(28, 28)
-	window.position = Vector2(10, 15)
-	window.color = Color(0.2, 0.3, 0.4)
-	room.add_child(window)
-
-	# Door handle
-	var handle = ColorRect.new()
-	handle.size = Vector2(6, 8)
-	handle.position = Vector2(36, 48)
-	handle.color = Color(0.8, 0.7, 0.3)
-	room.add_child(handle)
+	# Enhanced door graphic
+	var door_graphic = EnhancedGraphics.create_enhanced_door()
+	door_graphic.name = "Door"
+	room.add_child(door_graphic)
 
 	# Room label
 	var label_node = Label.new()
 	label_node.text = label
 	label_node.position = Vector2(-10, -18)
-	label_node.add_theme_font_size_override("font_size", 10)
+	label_node.add_theme_font_size_override("font_size", 11)
 	label_node.add_theme_color_override("font_color", Color(1, 1, 1))
+	label_node.add_theme_color_override("font_outline_color", Color(0, 0, 0))
+	label_node.add_theme_constant_override("outline_size", 2)
 	room.add_child(label_node)
 
 	# Interaction area
@@ -304,8 +278,8 @@ func _setup_player() -> void:
 	player.set_script(script)
 
 func _setup_hud() -> void:
-	# Load the classic HUD
-	var hud_script = load("res://scripts/ui/classic_hud.gd")
+	# Load the authentic Der Planer HUD
+	var hud_script = load("res://scripts/ui/planer_hud.gd")
 	game_hud = CanvasLayer.new()
 	game_hud.set_script(hud_script)
 	add_child(game_hud)
