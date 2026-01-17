@@ -79,13 +79,20 @@ func _create_floor(floor_num: int) -> Node2D:
 	bg.color = Color(0.4, 0.5, 0.65)
 	floor_container.add_child(bg)
 
-	# Corridor wall (textured)
-	var wall = EnhancedGraphics.create_textured_wall(1280, 180)
+	# Corridor wall (concrete texture)
+	var wall = EnhancedGraphics.create_textured_wall_with_bitmaps(1280, 180)
 	wall.position = Vector2(0, 440)
 	floor_container.add_child(wall)
 
-	# Textured floor
-	var floor_graphic = EnhancedGraphics.create_textured_floor(1280)
+	# Tiled floor (different for each floor type)
+	var floor_graphic: Control
+	if floor_num == 3:  # Top floor - marble
+		floor_graphic = EnhancedGraphics.create_marble_floor(1280)
+	elif floor_num == 2:  # Office floor - carpet
+		floor_graphic = EnhancedGraphics.create_carpet(1280, 80)
+	else:  # Lower floors - ceramic tiles
+		floor_graphic = EnhancedGraphics.create_tiled_floor(1280)
+
 	floor_graphic.position = Vector2(0, 620)
 	floor_container.add_child(floor_graphic)
 
@@ -101,11 +108,19 @@ func _create_floor(floor_num: int) -> Node2D:
 	# Add elevator
 	_add_elevator_to_floor(floor_container)
 
-	# Add some office furniture for detail
+	# Add office furniture for detail
 	if floor_num == 2:  # Office floor
-		var desk = EnhancedGraphics.create_office_desk()
+		var desk = EnhancedGraphics.create_textured_desk()
 		desk.position = Vector2(100, 550)
 		floor_container.add_child(desk)
+
+		var chair = EnhancedGraphics.create_office_chair()
+		chair.position = Vector2(160, 560)
+		floor_container.add_child(chair)
+
+		var cabinet = EnhancedGraphics.create_filing_cabinet()
+		cabinet.position = Vector2(1150, 550)
+		floor_container.add_child(cabinet)
 
 	return floor_container
 
@@ -171,19 +186,23 @@ func _create_room_door(room_name: String, label: String) -> Node2D:
 	var room = Node2D.new()
 	room.name = room_name
 
-	# Enhanced door graphic
-	var door_graphic = EnhancedGraphics.create_enhanced_door()
+	# Textured door graphic with real wood and metal
+	var door_graphic = EnhancedGraphics.create_textured_door()
 	door_graphic.name = "Door"
 	room.add_child(door_graphic)
 
-	# Room label
+	# Room label with better visibility
+	var label_bg = ColorRect.new()
+	label_bg.position = Vector2(-15, -22)
+	label_bg.size = Vector2(78, 18)
+	label_bg.color = Color(0, 0, 0, 0.7)
+	room.add_child(label_bg)
+
 	var label_node = Label.new()
 	label_node.text = label
-	label_node.position = Vector2(-10, -18)
+	label_node.position = Vector2(-10, -20)
 	label_node.add_theme_font_size_override("font_size", 11)
-	label_node.add_theme_color_override("font_color", Color(1, 1, 1))
-	label_node.add_theme_color_override("font_outline_color", Color(0, 0, 0))
-	label_node.add_theme_constant_override("outline_size", 2)
+	label_node.add_theme_color_override("font_color", Color(1, 1, 0.9))
 	room.add_child(label_node)
 
 	# Interaction area
