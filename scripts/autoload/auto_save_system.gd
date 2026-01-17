@@ -6,7 +6,7 @@ signal auto_save_completed
 signal auto_save_failed
 
 const AUTO_SAVE_INTERVAL: float = 300.0  # 5 minutes
-const AUTO_SAVE_FILE: String = "user://autosave.sav"
+const AUTOSAVE_SLOT: int = 0  # Use slot 0 for autosaves
 
 var auto_save_enabled: bool = true
 var time_since_last_save: float = 0.0
@@ -38,7 +38,7 @@ func perform_auto_save() -> void:
 
 	# Use SaveManager to save the game
 	if has_node("/root/SaveManager"):
-		var result = await SaveManager.save_game(AUTO_SAVE_FILE)
+		var result = await SaveManager.save_game(AUTOSAVE_SLOT, "Autosave")
 
 		if result:
 			auto_save_completed.emit()
@@ -77,7 +77,11 @@ func get_time_until_next_save() -> float:
 
 ## Check if auto-save file exists
 func has_auto_save() -> bool:
-	return FileAccess.file_exists(AUTO_SAVE_FILE)
+	if has_node("/root/SaveManager"):
+		var saves = SaveManager.get_save_list()
+		if saves.size() > AUTOSAVE_SLOT:
+			return not saves[AUTOSAVE_SLOT].get("empty", true)
+	return false
 
 ## Load auto-save
 func load_auto_save() -> bool:
@@ -85,14 +89,14 @@ func load_auto_save() -> bool:
 		return false
 
 	if has_node("/root/SaveManager"):
-		return SaveManager.load_game(AUTO_SAVE_FILE)
+		return SaveManager.load_game(AUTOSAVE_SLOT)
 
 	return false
 
 ## Delete auto-save
 func delete_auto_save() -> void:
-	if has_auto_save():
-		DirAccess.remove_absolute(AUTO_SAVE_FILE)
+	if has_auto_save() and has_node("/root/SaveManager"):
+		SaveManager.delete_save(AUTOSAVE_SLOT)
 
 ## Reset save timer (call after manual save)
 func reset_timer() -> void:
