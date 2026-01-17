@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Logistics Command Center - Mobile Edition</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0098c7",
+                        "background-light": "#f9fafa",
+                        "background-dark": "#101418",
+                        "surface": "#1B222C",
+                        "accent-orange": "#E67E22",
+                        "accent-green": "#0bda57"
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #27363a;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+<!-- Top AppBar Component -->
+<header class="sticky top-0 z-50 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center p-4 pb-2 justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1">account_balance_wallet</span>
+<h2 class="text-lg font-bold leading-tight tracking-tight">$1,240,500.00</h2>
+<span class="text-accent-green text-[10px] font-bold bg-accent-green/10 px-1 rounded">▲ 2.4%</span>
+</div>
+<p class="text-[10px] uppercase tracking-widest text-slate-500 font-bold">Global Operations Finance</p>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-sm">wb_sunny</span>
+<p class="text-sm font-bold tracking-tight">18°C • MON 08:30</p>
+</div>
+<div class="flex gap-1 mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-accent-green animate-pulse"></span>
+<span class="text-[10px] font-medium text-slate-400">SERVER LIVE</span>
+</div>
+</div>
+</div>
+<!-- SegmentedButtons for Speed Control -->
+<div class="px-4 pb-3">
+<div class="flex h-9 items-center justify-center rounded-lg bg-slate-200 dark:bg-surface p-1">
+<label class="flex cursor-pointer h-full grow items-center justify-center rounded-md px-2 has-[:checked]:bg-white dark:has-[:checked]:bg-background-dark has-[:checked]:shadow-sm transition-all text-slate-500 dark:text-slate-400 has-[:checked]:text-primary text-xs font-bold uppercase tracking-wider">
+<span class="truncate">PAUSE</span>
+<input class="hidden" name="speed" type="radio" value="0x"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center rounded-md px-2 has-[:checked]:bg-white dark:has-[:checked]:bg-background-dark has-[:checked]:shadow-sm transition-all text-slate-500 dark:text-slate-400 has-[:checked]:text-primary text-xs font-bold uppercase tracking-wider">
+<span class="truncate">1x</span>
+<input class="hidden" name="speed" type="radio" value="1x"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center rounded-md px-2 has-[:checked]:bg-white dark:has-[:checked]:bg-background-dark has-[:checked]:shadow-sm transition-all text-slate-500 dark:text-slate-400 has-[:checked]:text-primary text-xs font-bold uppercase tracking-wider">
+<span class="truncate">2x</span>
+<input checked="" class="hidden" name="speed" type="radio" value="2x"/>
+</label>
+<label class="flex cursor-pointer h-full grow items-center justify-center rounded-md px-2 has-[:checked]:bg-white dark:has-[:checked]:bg-background-dark has-[:checked]:shadow-sm transition-all text-slate-500 dark:text-slate-400 has-[:checked]:text-primary text-xs font-bold uppercase tracking-wider">
+<span class="truncate">5x</span>
+<input class="hidden" name="speed" type="radio" value="5x"/>
+</label>
+</div>
+</div>
+</header>
+<main class="flex flex-col gap-0">
+<!-- Map Component (Hero Area) -->
+<section class="relative h-[45vh] w-full overflow-hidden">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Dark global map with glowing cyan logistics routes" data-location="Global Logistics Network" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAEa8GzJDmv5y-ZQTTHOfTik-mWWXjqARs0qvEjdDrKFGtLidJ4qZfjTlivNm6lraJoDzN0pzl2m8kqsgIDFKleTWVq-xQh9ar8G7m5S-u1r-Isi33JbiHk2K6rb9mUutagWTs0Q1mAHidYpyzDrz0gvL6BR0ACngl5cyZwjPNBMg8D3NGYaGUyKj37fILIOXGWmPTIDmKlnLfYdTSEGw5U3JFy03zWtZF5XxDsCRYc2WuhLjV-VUkkEX5TmlNt-V_DdsldmeFS5JU");'>
+<!-- Map Overlay UI -->
+<div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent pointer-events-none"></div>
+<!-- Search Floating -->
+<div class="absolute top-4 left-4 right-4 z-10">
+<div class="flex w-full items-center rounded-xl bg-surface/90 backdrop-blur-md border border-slate-700/50 h-12 shadow-2xl">
+<div class="text-slate-400 px-4">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="flex-1 bg-transparent border-none text-white focus:ring-0 text-sm placeholder:text-slate-500" placeholder="Search hubs, routes, or vessels..."/>
+<button class="px-4 text-primary">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Map Controls -->
+<div class="absolute bottom-6 right-4 flex flex-col gap-2">
+<div class="flex flex-col rounded-xl bg-surface/90 backdrop-blur-md border border-slate-700/50 overflow-hidden shadow-xl">
+<button class="p-3 text-white border-b border-slate-700/50 hover:bg-white/10 active:bg-white/20">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="p-3 text-white hover:bg-white/10 active:bg-white/20">
+<span class="material-symbols-outlined">remove</span>
+</button>
+</div>
+<button class="p-3 rounded-xl bg-primary text-white shadow-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">near_me</span>
+</button>
+</div>
+<!-- Active Route Marker Example -->
+<div class="absolute top-1/2 left-1/3 flex flex-col items-center">
+<div class="bg-primary px-2 py-1 rounded text-[10px] font-bold text-white mb-1 shadow-lg">HUB_LON</div>
+<div class="w-3 h-3 bg-primary rounded-full ring-4 ring-primary/30 animate-pulse"></div>
+</div>
+</div>
+</section>
+<!-- Stats Tray -->
+<section class="px-4 -mt-10 relative z-20">
+<div class="flex overflow-x-auto gap-3 pb-4 no-scrollbar custom-scrollbar">
+<div class="flex min-w-[140px] flex-col gap-1 rounded-xl p-4 bg-surface border border-slate-700/50 shadow-xl">
+<p class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Revenue</p>
+<p class="text-white text-xl font-bold">+$45.2k</p>
+<p class="text-accent-green text-xs font-medium flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> +12%
+                    </p>
+</div>
+<div class="flex min-w-[140px] flex-col gap-1 rounded-xl p-4 bg-surface border border-slate-700/50 shadow-xl">
+<p class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Efficiency</p>
+<p class="text-white text-xl font-bold">94.8%</p>
+<p class="text-accent-green text-xs font-medium flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> +2.1%
+                    </p>
+</div>
+<div class="flex min-w-[140px] flex-col gap-1 rounded-xl p-4 bg-surface border border-slate-700/50 shadow-xl">
+<p class="text-slate-400 text-[10px] font-bold uppercase tracking-wider">Active Fleet</p>
+<p class="text-white text-xl font-bold">128</p>
+<p class="text-accent-orange text-xs font-medium flex items-center">
+<span class="material-symbols-outlined text-sm">trending_down</span> -5 units
+                    </p>
+</div>
+</div>
+</section>
+<!-- Current Tasks SectionHeader -->
+<section class="px-4 py-2">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-white text-lg font-bold leading-tight tracking-tight flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">assignment</span> Current Tasks
+                </h3>
+<span class="text-[10px] font-bold bg-primary/20 text-primary px-2 py-1 rounded-full">8 ACTIVE</span>
+</div>
+<div class="space-y-3">
+<!-- Task Card 1 -->
+<div class="bg-surface/40 border border-slate-800 rounded-xl p-4 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-white font-bold text-sm">Trans-Atlantic Logistics #492</h4>
+<p class="text-slate-500 text-xs">Port of Rotterdam → Port of New York</p>
+</div>
+<span class="text-[10px] text-accent-orange font-bold px-2 py-0.5 border border-accent-orange/30 rounded uppercase tracking-tighter">In Transit</span>
+</div>
+<div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full w-[65%]"></div>
+</div>
+<div class="flex justify-between items-center text-[10px] font-bold text-slate-400">
+<span>ETA: 14h 22m</span>
+<span>$12,400 Payout</span>
+</div>
+</div>
+<!-- Task Card 2 -->
+<div class="bg-surface/40 border border-slate-800 rounded-xl p-4 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="text-white font-bold text-sm">Fleet Maintenance: Vessel A-12</h4>
+<p class="text-slate-500 text-xs">Drydock Bay 4 • scheduled engine repair</p>
+</div>
+<span class="text-[10px] text-primary font-bold px-2 py-0.5 border border-primary/30 rounded uppercase tracking-tighter">Queued</span>
+</div>
+<div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-slate-600 h-full rounded-full w-[5%]"></div>
+</div>
+<div class="flex justify-between items-center text-[10px] font-bold text-slate-400">
+<span>Starts in: 02h 45m</span>
+<span>Cost: -$2,500</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Market Notifications -->
+<section class="px-4 py-6 mb-20">
+<h3 class="text-white text-lg font-bold leading-tight tracking-tight mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-accent-orange">notifications_active</span> Market Alerts
+            </h3>
+<div class="bg-accent-orange/10 border-l-4 border-accent-orange p-4 rounded-r-lg mb-3">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-accent-orange">warning</span>
+<div>
+<p class="text-white font-bold text-sm">Fuel Price Surge</p>
+<p class="text-slate-400 text-xs mt-1">Global crude prices rose 4.5% overnight. Logistics costs projected to increase.</p>
+</div>
+</div>
+</div>
+<div class="bg-primary/10 border-l-4 border-primary p-4 rounded-r-lg">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary">campaign</span>
+<div>
+<p class="text-white font-bold text-sm">New Route Unlocked</p>
+<p class="text-slate-400 text-xs mt-1">Singapore Hub connection is now available for heavy cargo transport.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Contextual FAB -->
+<button class="fixed bottom-24 right-6 size-14 rounded-full bg-primary text-white shadow-2xl flex items-center justify-center active:scale-90 transition-transform z-40 border-4 border-background-dark">
+<span class="material-symbols-outlined text-3xl">add_road</span>
+</button>
+<!-- Navigation Tab Bar -->
+<nav class="fixed bottom-0 left-0 right-0 z-50 bg-background-dark/95 backdrop-blur-xl border-t border-slate-800 px-6 py-2">
+<div class="flex items-center justify-between">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1">map</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">MAP</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-2xl">list_alt</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">TASKS</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-2xl">bar_chart_4_bars</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">STATS</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<div class="relative">
+<span class="material-symbols-outlined text-2xl">hub</span>
+<span class="absolute -top-1 -right-1 size-2 bg-accent-orange rounded-full ring-2 ring-background-dark"></span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest">HUBS</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-2xl">settings</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">SET</span>
+</button>
+</div>
+<!-- Safe area indicator -->
+<div class="h-6 w-1/3 bg-slate-800/30 mx-auto mt-4 rounded-full"></div>
+</nav>
+</body></html>

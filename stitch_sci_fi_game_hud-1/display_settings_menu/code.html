@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Display Settings - Industrial Simulation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0098c7",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#0f1e23",
+                        "surface-dark": "#1b2528",
+                        "border-dark": "#394f56",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>body {
+    font-family: "Space Grotesk", sans-serif;
+    background-color: #0f1e23
+    }
+.glass-panel {
+    background: rgba(15, 30, 35, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 152, 199, 0.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(0, 152, 199, 0.05)
+    }
+.custom-slider::-webkit-slider-runnable-track {
+    background: #27363a;
+    height: 4px;
+    border-radius: 2px
+    }
+.custom-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: #0098c7;
+    margin-top: -7px;
+    box-shadow: 0 0 8px rgba(0, 152, 199, 0.8);
+    cursor: pointer
+    }
+.office-bg {
+    background-image: linear-gradient(rgba(15, 30, 35, 0.8), rgba(15, 30, 35, 0.9)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuDzWOOn9aEnxxIgyM9O0nJ_qdOEO_Ie9oVwZGl8EnMG0hZb7d-dmMg58QlWmlgmX7_J3vikdRefQZJEjOYvcSanu-5ssDy6IzmawtwlUxYqXQcLxpiskrY_3QtcCkx0fX5dhykeDUuGDHzKEl3USp7OtZY0SgxxozQCAbawUZlLWY0ZP6UPm8kdLcMyV-pANeKuXInS1U4XAjpnBR28A6Vp8VVgDVj0AcCQJPYRGlfaLZ3cEch1QdkEaVGGAaj8-9l1Dr6QixVQjF0);
+    background-size: cover;
+    background-position: center;
+    filter: blur(4px)
+    }</style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col items-center justify-center p-4">
+<!-- Background Layer -->
+<div class="fixed inset-0 office-bg z-0" data-alt="Blurred modern corporate office interior background"></div>
+<!-- Main Container (VBox-style) -->
+<div class="relative z-10 w-full max-w-md h-full flex flex-col gap-4">
+<!-- TopAppBar -->
+<div class="glass-panel rounded-xl flex items-center p-4 justify-between">
+<div class="text-white flex size-10 items-center justify-center rounded-lg hover:bg-white/5 cursor-pointer">
+<span class="material-symbols-outlined">arrow_back_ios</span>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[0.1em] uppercase flex-1 text-center pr-10">Display Settings</h2>
+</div>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto space-y-4 no-scrollbar">
+<!-- General Section -->
+<div class="glass-panel rounded-xl overflow-hidden">
+<div class="bg-white/5 px-4 py-3 border-b border-border-dark/30">
+<h3 class="text-primary text-xs font-bold tracking-[0.2em] uppercase">General Configuration</h3>
+</div>
+<div class="p-4 space-y-6">
+<!-- Dropdown Component (HBox Logic) -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<p class="text-white/80 text-sm font-medium uppercase tracking-wider">Resolution</p>
+<span class="text-xs text-primary font-mono">Current: 2560x1440</span>
+</div>
+<div class="relative">
+<select class="appearance-none w-full rounded-lg text-white border border-border-dark bg-surface-dark/50 focus:border-primary focus:ring-1 focus:ring-primary h-12 px-4 text-base font-normal leading-normal transition-all outline-none">
+<option value="1">1920 x 1080 (16:9)</option>
+<option selected="" value="2">2560 x 1440 (16:9)</option>
+<option value="3">3840 x 2160 (16:9)</option>
+<option value="4">1280 x 720 (16:9)</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-white">
+<span class="material-symbols-outlined text-primary">unfold_more</span>
+</div>
+</div>
+</div>
+<!-- ListItem Toggle (HBox Logic) -->
+<div class="flex items-center justify-between py-1">
+<div class="flex items-center gap-3">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 size-10 border border-primary/20">
+<span class="material-symbols-outlined">fullscreen</span>
+</div>
+<div>
+<p class="text-white text-sm font-medium uppercase tracking-wider">Fullscreen Mode</p>
+<p class="text-white/40 text-[10px] uppercase">Exclusive hardware access</p>
+</div>
+</div>
+<div class="shrink-0">
+<label class="relative flex h-[28px] w-[52px] cursor-pointer items-center rounded-full border border-border-dark bg-surface-dark p-0.5 transition-colors has-[:checked]:bg-primary/30 has-[:checked]:border-primary/50">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="h-full w-[22px] rounded-full bg-white peer-checked:translate-x-[24px] transition-transform duration-200 shadow-[0_0_10px_rgba(255,255,255,0.3)]"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Advanced Section -->
+<div class="glass-panel rounded-xl overflow-hidden">
+<div class="bg-white/5 px-4 py-3 border-b border-border-dark/30">
+<h3 class="text-primary text-xs font-bold tracking-[0.2em] uppercase">Advanced Performance</h3>
+</div>
+<div class="p-4 space-y-8">
+<!-- ListItem Toggle -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 size-10 border border-primary/20">
+<span class="material-symbols-outlined">sync</span>
+</div>
+<div>
+<p class="text-white text-sm font-medium uppercase tracking-wider">Vertical Sync</p>
+<p class="text-white/40 text-[10px] uppercase">Prevents screen tearing</p>
+</div>
+</div>
+<div class="shrink-0">
+<label class="relative flex h-[28px] w-[52px] cursor-pointer items-center rounded-full border border-border-dark bg-surface-dark p-0.5 transition-colors has-[:checked]:bg-primary/30 has-[:checked]:border-primary/50">
+<input class="sr-only peer" type="checkbox"/>
+<div class="h-full w-[22px] rounded-full bg-white peer-checked:translate-x-[24px] transition-transform duration-200"></div>
+</label>
+</div>
+</div>
+<!-- Slider Component -->
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="text-primary flex items-center justify-center rounded-lg bg-primary/10 size-10 border border-primary/20">
+<span class="material-symbols-outlined">aspect_ratio</span>
+</div>
+<div>
+<p class="text-white text-sm font-medium uppercase tracking-wider">UI Scale</p>
+<p class="text-white/40 text-[10px] uppercase">Interface magnification</p>
+</div>
+</div>
+<span class="text-primary font-mono font-bold">115%</span>
+</div>
+<div class="px-2">
+<input class="custom-slider w-full appearance-none bg-transparent" max="150" min="50" type="range" value="115"/>
+<div class="flex justify-between mt-2 text-[10px] text-white/30 font-mono">
+<span>50%</span>
+<span>100%</span>
+<span>150%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Footer (HBox) -->
+<div class="mt-auto grid grid-cols-2 gap-3 pb-4">
+<button class="glass-panel py-4 rounded-xl text-white/60 font-bold tracking-[0.1em] uppercase text-sm hover:text-white transition-colors">
+                Cancel
+            </button>
+<button class="bg-primary py-4 rounded-xl text-white font-bold tracking-[0.1em] uppercase text-sm shadow-[0_4px_15px_rgba(0,152,199,0.4)] hover:brightness-110 active:scale-[0.98] transition-all">
+                Apply Changes
+            </button>
+</div>
+</div>
+</body></html>

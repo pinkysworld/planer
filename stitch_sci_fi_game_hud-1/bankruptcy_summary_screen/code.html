@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bankruptcy Summary - The Planer Simulation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0098c7",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#070808", // Custom deeper dark for somber tone
+                        "danger": "#fa5f38",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .scanline {
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, .1) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .liquidation-watermark {
+            transform: rotate(-35deg) scale(1.5);
+            opacity: 0.08;
+            user-select: none;
+        }
+        .glass-panel {
+            background: rgba(15, 30, 35, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 152, 199, 0.2);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white overflow-x-hidden antialiased">
+<!-- Background Layer with Watermark -->
+<div class="fixed inset-0 z-0 overflow-hidden flex items-center justify-center pointer-events-none">
+<div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&amp;fit=crop&amp;q=80&amp;w=1000')] bg-cover bg-center opacity-20 grayscale brightness-50" data-alt="Empty darkened corporate office interior desk"></div>
+<div class="scanline absolute inset-0 z-10"></div>
+<div class="liquidation-watermark absolute whitespace-nowrap text-[120px] font-bold text-white tracking-tighter z-10">
+            LIQUIDATION LIQUIDATION LIQUIDATION
+        </div>
+</div>
+<!-- Main Content Container -->
+<div class="relative z-20 flex flex-col min-h-screen max-w-md mx-auto border-x border-primary/10 bg-background-dark/40 shadow-2xl">
+<!-- TopAppBar -->
+<div class="flex items-center bg-background-dark/80 p-4 pb-2 justify-between border-b border-white/5">
+<div class="text-danger flex size-12 shrink-0 items-center animate-pulse" data-icon="warning">
+<span class="material-symbols-outlined text-3xl">warning</span>
+</div>
+<div class="flex flex-col items-center">
+<h2 class="text-white text-xs font-medium leading-tight tracking-[0.2em] uppercase opacity-60">Status Report</h2>
+<h2 class="text-danger text-lg font-bold leading-tight tracking-[-0.015em]">SYSTEM CRITICAL</h2>
+</div>
+<div class="flex w-12 items-center justify-end">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-white/5 text-white/40 border border-white/10">
+<span class="material-symbols-outlined text-xl">close</span>
+</button>
+</div>
+</div>
+<!-- Headline Content -->
+<div class="px-6 pt-10 pb-4 text-center">
+<div class="inline-block px-3 py-1 mb-4 rounded-full border border-danger/30 bg-danger/10 text-danger text-[10px] font-bold tracking-widest uppercase">
+                Bankrupt 14:02 GMT
+            </div>
+<h1 class="text-white tracking-tight text-4xl font-bold leading-tight pb-3">Company Dissolved</h1>
+<p class="text-white/60 text-sm font-normal leading-relaxed px-4">
+                Inability to service high-interest loans led to total insolvency. All physical and digital assets have been seized by primary creditors.
+            </p>
+</div>
+<!-- Career Stats Grid -->
+<div class="flex flex-wrap gap-3 p-4">
+<div class="flex min-w-[140px] flex-1 flex-col gap-1 rounded-lg p-5 glass-panel">
+<p class="text-white/40 text-[10px] uppercase font-bold tracking-wider">Days Active</p>
+<div class="flex items-baseline gap-2">
+<p class="text-white text-2xl font-bold">1,248</p>
+<span class="text-danger text-xs font-medium">TERMINATED</span>
+</div>
+<div class="h-1 w-full bg-white/5 mt-2 rounded-full overflow-hidden">
+<div class="h-full bg-danger w-full"></div>
+</div>
+</div>
+<div class="flex min-w-[140px] flex-1 flex-col gap-1 rounded-lg p-5 glass-panel">
+<p class="text-white/40 text-[10px] uppercase font-bold tracking-wider">Final Balance</p>
+<div class="flex items-baseline gap-2">
+<p class="text-danger text-2xl font-bold">-$12.8M</p>
+</div>
+<p class="text-white/30 text-[10px]">TOTAL LIABILITY</p>
+</div>
+<div class="flex min-w-[140px] flex-1 flex-col gap-1 rounded-lg p-5 glass-panel border-l-2 border-l-primary">
+<p class="text-white/40 text-[10px] uppercase font-bold tracking-wider">Peak Valuation</p>
+<div class="flex items-baseline gap-2">
+<p class="text-primary text-2xl font-bold">$42.5M</p>
+</div>
+<p class="text-primary/60 text-[10px]">FY 1998 RECORD</p>
+</div>
+<div class="flex min-w-[140px] flex-1 flex-col gap-1 rounded-lg p-5 glass-panel">
+<p class="text-white/40 text-[10px] uppercase font-bold tracking-wider">Staff Redundancy</p>
+<div class="flex items-baseline gap-2">
+<p class="text-white text-2xl font-bold">412</p>
+<span class="text-white/40 text-xs">EMPLOYEES</span>
+</div>
+<p class="text-white/30 text-[10px]">UNEMPLOYMENT FILED</p>
+</div>
+</div>
+<!-- Seized Assets Breakdown -->
+<div class="px-4 pb-6">
+<div class="glass-panel rounded-xl overflow-hidden">
+<div class="bg-white/5 px-4 py-2 border-b border-white/5 flex justify-between items-center">
+<span class="text-[10px] font-bold uppercase tracking-widest text-white/50">Asset Liquidation Log</span>
+<span class="text-[10px] font-mono text-primary">SCANNING...</span>
+</div>
+<div class="p-4 space-y-4">
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-white/30">local_shipping</span>
+<div class="flex flex-col">
+<span class="text-xs font-medium text-white/80">Logistics Fleet</span>
+<span class="text-[10px] text-white/40">12 Heavy Trucks</span>
+</div>
+</div>
+<span class="text-xs font-bold text-danger">SEIZED</span>
+</div>
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-white/30">domain</span>
+<div class="flex flex-col">
+<span class="text-xs font-medium text-white/80">HQ Real Estate</span>
+<span class="text-[10px] text-white/40">Berlin Office Complex</span>
+</div>
+</div>
+<span class="text-xs font-bold text-danger">REPOSSESSED</span>
+</div>
+<div class="flex items-center justify-between group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-white/30">inventory_2</span>
+<div class="flex flex-col">
+<span class="text-xs font-medium text-white/80">Unsold Inventory</span>
+<span class="text-[10px] text-white/40">Warehouse Lot B-4</span>
+</div>
+</div>
+<span class="text-xs font-bold text-danger">SOLD AT AUCTION</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Verdict Section -->
+<div class="mt-auto px-4 pb-24">
+<div class="p-4 rounded-lg bg-primary/5 border border-primary/20 text-center">
+<p class="text-primary text-[10px] font-bold tracking-widest uppercase mb-2">The Final Verdict</p>
+<p class="text-white/80 text-sm italic font-light">
+                    "Your aggressive expansion in the third quarter failed to account for rising interest rates. The legacy of your firm ends here."
+                </p>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto p-4 bg-background-dark/90 backdrop-blur-xl border-t border-white/10 flex flex-col gap-3">
+<button class="w-full bg-primary hover:bg-primary/90 text-white py-4 rounded-lg font-bold tracking-wider flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(0,152,199,0.3)] transition-all">
+<span class="material-symbols-outlined">restart_alt</span>
+                NEW CAREER
+            </button>
+<button class="w-full bg-transparent hover:bg-white/5 text-white/60 py-3 rounded-lg font-bold text-sm tracking-widest flex items-center justify-center gap-2 border border-white/10 transition-all">
+                EXIT TO MAIN MENU
+            </button>
+</div>
+</div>
+</body></html>

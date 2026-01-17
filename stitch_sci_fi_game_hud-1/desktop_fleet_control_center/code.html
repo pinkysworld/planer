@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fleet Control Center | Command</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00AAD4",
+                        "background-light": "#f9fafa",
+                        "background-dark": "#16191d",
+                        "card-dark": "#2a2f38",
+                        "accent-green": "#0bda57",
+                        "accent-amber": "#f59e0b"
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .custom-glow { box-shadow: 0 0 15px rgba(0, 170, 212, 0.3); }
+        .glass-panel { background: rgba(42, 47, 56, 0.8); backdrop-filter: blur(8px); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white selection:bg-primary/30 overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-background-light dark:bg-background-dark/95 border-b border-primary/20 backdrop-blur-md">
+<div class="flex items-center p-4 pb-2 justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary/10 p-2 rounded-lg border border-primary/30">
+<span class="material-symbols-outlined text-primary text-2xl">monitoring</span>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-tight">Fleet Control</h2>
+</div>
+<div class="flex gap-4 items-center">
+<button class="bg-primary/20 hover:bg-primary/30 border border-primary/40 px-3 py-1.5 rounded-lg transition-all active:scale-95">
+<p class="text-primary text-xs font-bold uppercase tracking-widest">Repair All</p>
+</button>
+</div>
+</div>
+<!-- Global Stats Row -->
+<div class="flex gap-2 p-4 pt-2 overflow-x-auto no-scrollbar">
+<div class="flex min-w-[140px] flex-col gap-1 rounded-lg p-3 bg-card-dark border border-white/5">
+<p class="text-white/50 text-[10px] font-bold uppercase tracking-wider">Total Profit</p>
+<div class="flex items-end gap-2">
+<p class="text-white text-xl font-bold leading-none">$1.2M</p>
+<p class="text-accent-green text-[10px] font-bold mb-0.5">+12%</p>
+</div>
+</div>
+<div class="flex min-w-[140px] flex-col gap-1 rounded-lg p-3 bg-card-dark border border-white/5">
+<p class="text-white/50 text-[10px] font-bold uppercase tracking-wider">Active Fleet</p>
+<div class="flex items-end gap-2">
+<p class="text-white text-xl font-bold leading-none">92%</p>
+<span class="size-2 rounded-full bg-accent-green animate-pulse mb-1.5"></span>
+</div>
+</div>
+<div class="flex min-w-[140px] flex-col gap-1 rounded-lg p-3 bg-card-dark border border-white/5">
+<p class="text-white/50 text-[10px] font-bold uppercase tracking-wider">Global Rank</p>
+<div class="flex items-end gap-2">
+<p class="text-white text-xl font-bold leading-none">#42</p>
+<p class="text-primary text-[10px] font-bold mb-0.5">TOP 5%</p>
+</div>
+</div>
+</div>
+</header>
+<main class="pb-24">
+<!-- Main Inspection View (Detail Section) -->
+<section class="p-4">
+<div class="relative w-full aspect-video rounded-xl bg-gradient-to-b from-card-dark to-background-dark border border-primary/30 overflow-hidden custom-glow group">
+<!-- 3D Model Placeholder -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<img class="object-contain h-4/5 w-4/5 opacity-90 drop-shadow-[0_0_30px_rgba(0,170,212,0.4)]" data-alt="3D render of a futuristic heavy-duty cargo truck on a dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzaopE7t1rb4kmSNBrX_ESuL13Ee29Dh1e07Ulq1CC6GGawYGSUoysUNhTalFSrXjxgROBvzifYDlw6rzXk5a8GkVe2nX-g88vNEbvSHp_SokDDLMdlv6TLqJHsH5siILVt0ntAcHBtRwIaSMP5xlnRKJKEN3j0SV12Hllx0RRp0rmGwtAMn8P5gwu1hMEQgmjJGa_3MWzp3Fr7r1CmVQ8YXzceUV4tHoQD6yWhYTRxDp5_h-U5UNf6K-6vtSoBW4NVeTeSS3mRRI"/>
+</div>
+<!-- HUD Overlays -->
+<div class="absolute top-4 left-4 flex flex-col gap-1">
+<span class="text-[10px] text-primary font-bold bg-primary/10 border border-primary/40 px-2 py-0.5 rounded uppercase">Unit TRK-082</span>
+<h3 class="text-xl font-bold text-white tracking-tighter">HEAVY HAULER X5</h3>
+</div>
+<div class="absolute bottom-4 right-4 flex gap-2">
+<div class="size-8 rounded-full border border-white/20 bg-black/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">3d_rotation</span>
+</div>
+<div class="size-8 rounded-full border border-white/20 bg-black/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">zoom_in</span>
+</div>
+</div>
+<div class="absolute inset-x-0 bottom-0 h-1 bg-white/10">
+<div class="h-full bg-primary w-[88%] custom-glow"></div>
+</div>
+</div>
+<!-- Quick Actions -->
+<div class="grid grid-cols-3 gap-2 mt-4">
+<button class="flex flex-col items-center justify-center gap-2 p-4 rounded-lg bg-card-dark border border-white/5 active:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-primary">person_add</span>
+<span class="text-[10px] font-bold uppercase tracking-wider text-white/70">Staffing</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-4 rounded-lg bg-card-dark border border-white/5 active:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-accent-amber">build</span>
+<span class="text-[10px] font-bold uppercase tracking-wider text-white/70">Tuning</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-4 rounded-lg bg-primary border border-primary active:brightness-110 transition-all">
+<span class="material-symbols-outlined text-white">bolt</span>
+<span class="text-[10px] font-bold uppercase tracking-wider text-white">Upgrade</span>
+</button>
+</div>
+</section>
+<!-- Fleet List Section -->
+<section class="mt-2">
+<div class="flex items-center justify-between px-4 pb-4 border-b border-white/5">
+<div class="flex gap-4">
+<button class="text-sm font-bold border-b-2 border-primary pb-1">All Units</button>
+<button class="text-sm font-bold text-white/40 pb-1">In Transit</button>
+<button class="text-sm font-bold text-white/40 pb-1">Maintenance</button>
+</div>
+<span class="material-symbols-outlined text-white/40">filter_list</span>
+</div>
+<div class="divide-y divide-white/5">
+<!-- Fleet Item 1 (Selected) -->
+<div class="flex items-center gap-4 bg-primary/5 px-4 min-h-[80px] py-3 justify-between border-l-4 border-primary">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-14 border border-white/10" data-alt="Front view of a white heavy cargo truck" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAY3rlXD6o6VEYjenECcBtiT13su8uSUEi0X7xps6IjmaQtFO1GpnxjBBoN4TLEM1ZP2ktsUzdFWpTdhu1o6X-uCEdyJH8pLNVLbYU1O6FhSMbSprxWx41-QfhQgnfpUDk5MDosU7cpZ2cNR2NsqFpDuO3eY2Ppc9rsVJzW2O2I3ov8QRe-cNDYcpIXqf8w-X33WaaKNXQglhaW_nofgZJsR71fO_vqLmWng6HDWu7iMtwoGFrVIYIX2fxTdAPCzBVZsCboPMDL0Bc");'></div>
+<div class="absolute -top-1 -right-1 size-3 rounded-full bg-accent-green border-2 border-[#16191d]"></div>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-white text-sm font-bold tracking-tight">TRK-082 | Heavy Hauler</p>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-white/50 bg-white/5 px-1.5 py-0.5 rounded">CHICAGO → NY</span>
+<span class="text-[10px] text-accent-green font-bold">ON TIME</span>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="text-white text-base font-bold leading-none">+$4.2k</p>
+<p class="text-[10px] text-white/40 mt-1">Today</p>
+</div>
+</div>
+<!-- Fleet Item 2 -->
+<div class="flex items-center gap-4 bg-transparent px-4 min-h-[80px] py-3 justify-between active:bg-white/5 transition-colors">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-14 border border-white/10" data-alt="Side view of a sleek modern silver delivery truck" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBsuBpRLWPZoSsSMUh6rLH93HN7XAuEyNx8SO4v8PGUj-miXyFgZfbpJWA-QJpSsjquRvUF42VNnlHIIqX_ec-0d4-v3PDgAIuav0oWLKcljLjAYW-SEEXRWfphjTWyYkFVJJrGIUC97CsgGWTwBjj8h85atgdfL-9AJrYyY_UGauMoSS7Cq-vxgEy_5HTYys7APx_VLBjZWKc1Q3t8T1jmpPZzyvA8-WFe0VkJCL8cSIqh_UCDWkyuzpFKdqMRZDlIrwnUmmlggoo");'></div>
+<div class="absolute -top-1 -right-1 size-3 rounded-full bg-accent-amber border-2 border-[#16191d]"></div>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-white text-sm font-bold tracking-tight">TRK-091 | Aero Liner</p>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-white/50 bg-white/5 px-1.5 py-0.5 rounded">IDLE</span>
+<span class="text-[10px] text-accent-amber font-bold">WEAR: 78%</span>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="text-white text-base font-bold leading-none">-$120</p>
+<p class="text-[10px] text-white/40 mt-1">Fueling</p>
+</div>
+</div>
+<!-- Fleet Item 3 -->
+<div class="flex items-center gap-4 bg-transparent px-4 min-h-[80px] py-3 justify-between active:bg-white/5 transition-colors">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-lg size-14 border border-white/10" data-alt="A dark industrial truck designed for heavy loads" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDfTAu8JhvnC_v5aAwOx3U_8eLqzQ8uujAedu-BiX7X85-ka6S7c03GJFp67_WoDDuDGo8KNBu9PG1uyd6xBeiGSj455wi8rwvrNvnVVcwcdJaEhpbvdvv9BjgD1oRYCCrCUbV9bXAagaqBcdLEM6hHkU1fzlbvcPoUPQWYi5skPwkHgzS3cs31SCdpMgKfXIB1Kuj7qc6gNGPwQn-AQcsevX2kL0R1SlkGlHDXMY_SsG7PTwWhiXa7fjxDewu5R-7SIsks623A0G8");'></div>
+<div class="absolute -top-1 -right-1 size-3 rounded-full bg-accent-green border-2 border-[#16191d]"></div>
+</div>
+<div class="flex flex-col justify-center">
+<p class="text-white text-sm font-bold tracking-tight">TRK-104 | Iron Titan</p>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-white/50 bg-white/5 px-1.5 py-0.5 rounded">DENVER → SF</span>
+<span class="text-[10px] text-accent-green font-bold">82% COMPLETE</span>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="text-white text-base font-bold leading-none">+$8.9k</p>
+<p class="text-[10px] text-white/40 mt-1">Peak Rate</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 inset-x-0 z-50 glass-panel border-t border-white/10 px-6 py-3 flex justify-between items-center safe-area-bottom">
+<div class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-2xl">local_shipping</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Fleet</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-white/40">
+<span class="material-symbols-outlined text-2xl">group</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Staff</span>
+</div>
+<div class="relative -top-6">
+<div class="size-14 rounded-full bg-primary flex items-center justify-center border-4 border-[#16191d] shadow-lg shadow-primary/40">
+<span class="material-symbols-outlined text-white text-3xl">map</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1 text-white/40">
+<span class="material-symbols-outlined text-2xl">trending_up</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Market</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-white/40">
+<span class="material-symbols-outlined text-2xl">settings</span>
+<span class="text-[10px] font-bold uppercase tracking-tighter">Config</span>
+</div>
+</nav>
+<!-- Map mini-widget floating element -->
+<div class="fixed bottom-24 right-4 z-40">
+<div class="size-16 rounded-lg bg-card-dark border border-white/10 overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all cursor-pointer" data-alt="Abstract satellite map view showing highway routes" data-location="Chicago" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9DXtNtNn4nG-r7dOxJzun7P3cJGx9R24I5Ba5kXDSNN0nxBOuLiH6ZuI5w2KorUGru1xpeSqHEKvRikQbor2fp0Rgb5wr2mn5qArOvHYSI4U_bTb6fwEYedBK1vvb4Wk4IRppI4ZumLfdsq7Fmp-eCg_5tNXvNPB9dbjdE2rK4nVhalCuCF9FKGvCDk9JOXCktbxAIMPiA3ps6Bth709VPMBVceYf9bfpCXcH7EIoEZ8LBlrcLVXQdjL8lg6_YfKq3MBwsH6gvZg"/>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="size-2 rounded-full bg-primary animate-ping"></div>
+</div>
+</div>
+</div>
+</body></html>
