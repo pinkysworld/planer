@@ -308,26 +308,56 @@ static func create_window_sprite() -> Sprite2D:
 	var sprite = Sprite2D.new()
 	var img = Image.create(32, 48, false, Image.FORMAT_RGBA8)
 
-	# Window frame
+	# Window frame (dark gray)
 	img.fill(DOOR_FRAME)
 
-	# Glass panes
+	# Glass panes with realistic sky gradient
 	for y in range(4, 44):
 		for x in range(4, 28):
-			# Sky/outside color
-			var sky_var = (y % 8) / 8.0
-			img.set_pixel(x, y, Color(0.6 + sky_var * 0.1, 0.7 + sky_var * 0.1, 0.9))
+			# Sky gradient (lighter at top)
+			var gradient = float(y - 4) / 40.0
+			var sky_color = Color(
+				0.50 + gradient * 0.15,
+				0.60 + gradient * 0.15,
+				0.80 + gradient * 0.10
+			)
 
-	# Window divider
+			# Add slight color variation for atmosphere
+			var noise = (hash(Vector2i(x / 2, y / 2)) % 10) / 100.0
+			sky_color = Color(
+				sky_color.r + noise,
+				sky_color.g + noise,
+				sky_color.b + noise
+			)
+			img.set_pixel(x, y, sky_color)
+
+	# Window dividers (cross pattern)
 	for y in range(4, 44):
+		img.set_pixel(15, y, DOOR_FRAME)
 		img.set_pixel(16, y, DOOR_FRAME)
+		img.set_pixel(17, y, DOOR_FRAME)
 	for x in range(4, 28):
+		img.set_pixel(x, 23, DOOR_FRAME)
 		img.set_pixel(x, 24, DOOR_FRAME)
+		img.set_pixel(x, 25, DOOR_FRAME)
 
-	# Reflections
-	for y in range(6, 12):
-		for x in range(6, 14):
-			img.set_pixel(x, y, Color(1, 1, 1, 0.3))
+	# Cloud visible through window (upper left pane)
+	for y in range(8, 16):
+		for x in range(7, 14):
+			if (x - 10) * (x - 10) + (y - 12) * (y - 12) < 18:
+				img.set_pixel(x, y, Color(0.88, 0.90, 0.95))
+
+	# Bright reflections (highlights)
+	for y in range(5, 10):
+		for x in range(5, 12):
+			if (x - 8) * (x - 8) + (y - 7) * (y - 7) < 8:
+				img.set_pixel(x, y, Color(0.95, 0.98, 1.0))
+
+	# Window sill (bottom edge)
+	for x in range(0, 32):
+		img.set_pixel(x, 45, DOOR_FRAME.lightened(0.1))
+		img.set_pixel(x, 46, DOOR_FRAME.lightened(0.15))
+		img.set_pixel(x, 47, DOOR_FRAME.lightened(0.2))
 
 	var texture = ImageTexture.create_from_image(img)
 	sprite.texture = texture
