@@ -31,6 +31,11 @@ EmployeeAI="*res://scripts/autoload/employee_ai.gd"
 VisualEffects="*res://scripts/autoload/visual_effects.gd"
 InsuranceSystem="*res://scripts/autoload/insurance_system.gd"
 ResearchSystem="*res://scripts/autoload/research_system.gd"
+TextureCache="*res://scripts/autoload/texture_cache.gd"
+SceneManager="*res://scripts/autoload/scene_manager.gd"
+NotificationManager="*res://scripts/autoload/notification_manager.gd"
+AutoSaveSystem="*res://scripts/autoload/auto_save_system.gd"
+StartupManager="*res://scripts/autoload/startup_manager.gd"
 
 [display]
 

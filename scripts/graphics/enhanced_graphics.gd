@@ -3,7 +3,7 @@ extends Node
 
 class_name EnhancedGraphics
 
-const TextureGenerator = preload("res://scripts/graphics/texture_generator.gd")
+# Textures are now cached via TextureCache autoload for better performance
 
 # Enhanced color palette with gradients
 const WALL_LIGHT: Color = Color(0.6, 0.68, 0.75)
@@ -280,7 +280,7 @@ static func create_textured_door() -> Control:
 
 	# Door frame (metal texture)
 	var frame = TextureRect.new()
-	frame.texture = TextureGenerator.generate_metal_texture(48, 96, Color(0.3, 0.32, 0.35))
+	frame.texture = TextureCache.get_metal_texture(48, 96, Color(0.3, 0.32, 0.35))
 	frame.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	frame.stretch_mode = TextureRect.STRETCH_TILE
 	frame.size = Vector2(48, 96)
@@ -288,7 +288,7 @@ static func create_textured_door() -> Control:
 
 	# Wood door panel
 	var door_panel = TextureRect.new()
-	door_panel.texture = TextureGenerator.generate_wood_texture(42, 90, Color(0.55, 0.4, 0.3))
+	door_panel.texture = TextureCache.get_wood_texture(42, 90, Color(0.55, 0.4, 0.3))
 	door_panel.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	door_panel.stretch_mode = TextureRect.STRETCH_TILE
 	door_panel.position = Vector2(3, 3)
@@ -297,7 +297,7 @@ static func create_textured_door() -> Control:
 
 	# Glass window
 	var window = TextureRect.new()
-	window.texture = TextureGenerator.generate_glass_texture(28, 28)
+	window.texture = TextureCache.get_glass_texture(28, 28)
 	window.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	window.position = Vector2(10, 15)
 	window.size = Vector2(28, 28)
@@ -305,7 +305,7 @@ static func create_textured_door() -> Control:
 
 	# Metal handle
 	var handle = TextureRect.new()
-	handle.texture = TextureGenerator.generate_metal_texture(6, 10, Color(0.85, 0.8, 0.4))
+	handle.texture = TextureCache.get_metal_texture(6, 10, Color(0.85, 0.8, 0.4))
 	handle.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	handle.position = Vector2(36, 48)
 	handle.size = Vector2(6, 10)
@@ -319,7 +319,7 @@ static func create_textured_wall_with_bitmaps(width: int, height: int) -> Contro
 	wall_container.custom_minimum_size = Vector2(width, height)
 
 	var wall_texture = TextureRect.new()
-	wall_texture.texture = TextureGenerator.generate_concrete_texture(width, height, WALL_MID)
+	wall_texture.texture = TextureCache.get_concrete_texture(width, height, WALL_MID)
 	wall_texture.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	wall_texture.stretch_mode = TextureRect.STRETCH_TILE
 	wall_texture.size = Vector2(width, height)
@@ -336,7 +336,7 @@ static func create_tiled_floor(width: int) -> Control:
 	for x in range(0, width, 32):
 		for y in range(0, 80, 32):
 			var tile = TextureRect.new()
-			tile.texture = TextureGenerator.generate_tile_texture(32, Color(0.88, 0.85, 0.82))
+			tile.texture = TextureCache.get_tile_texture(32, Color(0.88, 0.85, 0.82))
 			tile.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 			tile.position = Vector2(x, y)
 			tile.size = Vector2(32, 32)
@@ -350,7 +350,7 @@ static func create_marble_floor(width: int) -> Control:
 	floor_container.custom_minimum_size = Vector2(width, 80)
 
 	var marble = TextureRect.new()
-	marble.texture = TextureGenerator.generate_marble_texture(width, 80)
+	marble.texture = TextureCache.get_marble_texture(width, 80)
 	marble.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	marble.stretch_mode = TextureRect.STRETCH_TILE
 	marble.size = Vector2(width, 80)
@@ -365,7 +365,7 @@ static func create_textured_desk() -> Control:
 
 	# Wood desk surface
 	var desk = TextureRect.new()
-	desk.texture = TextureGenerator.generate_wood_texture(96, 32, WOOD_COLOR)
+	desk.texture = TextureCache.get_wood_texture(96, 32, WOOD_COLOR)
 	desk.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	desk.position = Vector2(0, 32)
 	desk.size = Vector2(96, 32)
@@ -373,7 +373,7 @@ static func create_textured_desk() -> Control:
 
 	# Metal monitor
 	var monitor_base = TextureRect.new()
-	monitor_base.texture = TextureGenerator.generate_metal_texture(36, 28, Color(0.75, 0.75, 0.75))
+	monitor_base.texture = TextureCache.get_metal_texture(36, 28, Color(0.75, 0.75, 0.75))
 	monitor_base.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	monitor_base.position = Vector2(30, 8)
 	monitor_base.size = Vector2(36, 28)
@@ -381,7 +381,7 @@ static func create_textured_desk() -> Control:
 
 	# Glass screen
 	var screen = TextureRect.new()
-	screen.texture = TextureGenerator.generate_glass_texture(30, 20, Color(0.2, 0.3, 0.4, 0.9))
+	screen.texture = TextureCache.get_glass_texture(30, 20, Color(0.2, 0.3, 0.4, 0.9))
 	screen.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	screen.position = Vector2(33, 11)
 	screen.size = Vector2(30, 20)
@@ -396,7 +396,7 @@ static func create_office_chair() -> Control:
 
 	# Seat (leather)
 	var seat = TextureRect.new()
-	seat.texture = TextureGenerator.generate_leather_texture(40, 24, Color(0.3, 0.2, 0.15))
+	seat.texture = TextureCache.get_leather_texture(40, 24, Color(0.3, 0.2, 0.15))
 	seat.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	seat.position = Vector2(4, 24)
 	seat.size = Vector2(40, 24)
@@ -404,7 +404,7 @@ static func create_office_chair() -> Control:
 
 	# Back (leather)
 	var back = TextureRect.new()
-	back.texture = TextureGenerator.generate_leather_texture(32, 32, Color(0.3, 0.2, 0.15))
+	back.texture = TextureCache.get_leather_texture(32, 32, Color(0.3, 0.2, 0.15))
 	back.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	back.position = Vector2(8, 0)
 	back.size = Vector2(32, 32)
@@ -412,7 +412,7 @@ static func create_office_chair() -> Control:
 
 	# Base (metal)
 	var base = TextureRect.new()
-	base.texture = TextureGenerator.generate_metal_texture(48, 12, Color(0.4, 0.4, 0.42))
+	base.texture = TextureCache.get_metal_texture(48, 12, Color(0.4, 0.4, 0.42))
 	base.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	base.position = Vector2(0, 52)
 	base.size = Vector2(48, 12)
@@ -426,7 +426,7 @@ static func create_carpet(width: int, height: int) -> Control:
 	carpet_container.custom_minimum_size = Vector2(width, height)
 
 	var carpet = TextureRect.new()
-	carpet.texture = TextureGenerator.generate_carpet_texture(width, height, Color(0.5, 0.25, 0.2))
+	carpet.texture = TextureCache.get_carpet_texture(width, height, Color(0.5, 0.25, 0.2))
 	carpet.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	carpet.stretch_mode = TextureRect.STRETCH_TILE
 	carpet.size = Vector2(width, height)
@@ -440,7 +440,7 @@ static func create_filing_cabinet() -> Control:
 	cabinet_container.custom_minimum_size = Vector2(48, 72)
 
 	var cabinet = TextureRect.new()
-	cabinet.texture = TextureGenerator.generate_metal_texture(48, 72, Color(0.55, 0.55, 0.58))
+	cabinet.texture = TextureCache.get_metal_texture(48, 72, Color(0.55, 0.55, 0.58))
 	cabinet.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	cabinet.size = Vector2(48, 72)
 	cabinet_container.add_child(cabinet)
