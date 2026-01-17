@@ -3,6 +3,8 @@ extends Node
 
 class_name RoomGraphics
 
+const PhotorealisticGraphics = preload("res://scripts/graphics/photorealistic_graphics.gd")
+
 # Color palette for room objects
 const DESK_WOOD: Color = Color(0.55, 0.35, 0.20)
 const DESK_DARK: Color = Color(0.35, 0.22, 0.12)
