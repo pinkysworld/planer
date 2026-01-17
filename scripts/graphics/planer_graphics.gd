@@ -15,8 +15,13 @@ const WINDOW_GLASS: Color = Color(0.35, 0.52, 0.68)
 const HIGHLIGHT: Color = Color(0.85, 0.90, 0.95)
 const SHADOW: Color = Color(0.18, 0.20, 0.24)
 
-## Creates a door sprite with authentic Der Planer style
+## Creates a photorealistic door sprite matching Der Planer screenshots
 static func create_door_sprite() -> Sprite2D:
+	# Use photorealistic door for much better visual quality
+	return PhotorealisticGraphics.create_realistic_door(48, 96)
+
+## Creates a door sprite (legacy version for reference)
+static func create_door_sprite_legacy() -> Sprite2D:
 	var sprite = Sprite2D.new()
 	var img = Image.create(32, 64, false, Image.FORMAT_RGBA8)
 

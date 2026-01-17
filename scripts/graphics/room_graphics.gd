@@ -18,87 +18,10 @@ const TRUCK_BODY: Color = Color(0.90, 0.88, 0.85)
 const GARAGE_FLOOR: Color = Color(0.42, 0.44, 0.46)
 const WALL_LIGHT: Color = Color(0.72, 0.75, 0.78)
 
-## Creates an office desk with computer using realistic textures
+## Creates an office desk with computer using photorealistic graphics
 static func create_office_desk() -> Node2D:
-	var desk_node = Node2D.new()
-	var img = Image.create(120, 80, false, Image.FORMAT_RGBA8)
-
-	# Generate realistic wood texture for desk
-	var wood_texture_img = TextureGenerator.generate_wood_texture(120, 20, DESK_WOOD).get_image()
-	# Copy wood texture to desk top area
-	for y in range(15, 35):
-		for x in range(0, 120):
-			img.set_pixel(x, y, wood_texture_img.get_pixel(x, y - 15))
-
-	# Desk edge (darker)
-	for x in range(0, 120):
-		img.set_pixel(x, 34, DESK_DARK)
-		img.set_pixel(x, 35, DESK_DARK)
-
-	# Desk legs (left and right)
-	for y in range(35, 80):
-		for x in range(5, 15):
-			img.set_pixel(x, y, DESK_DARK)
-		for x in range(105, 115):
-			img.set_pixel(x, y, DESK_DARK)
-
-	# Computer monitor (left side)
-	# Monitor base
-	for y in range(50, 56):
-		for x in range(25, 35):
-			img.set_pixel(x, y, METAL_GRAY)
-
-	# Monitor screen
-	for y in range(25, 50):
-		for x in range(20, 50):
-			# Screen frame
-			if x < 22 or x > 47 or y < 27 or y > 48:
-				img.set_pixel(x, y, METAL_GRAY)
-			else:
-				# Screen content (dark with green text)
-				img.set_pixel(x, y, SCREEN_DARK)
-				# Add some green "text" lines
-				if y % 4 == 0 and x > 24 and x < 45:
-					img.set_pixel(x, y, SCREEN_GREEN)
-
-	# Keyboard
-	for y in range(52, 58):
-		for x in range(45, 75):
-			if y == 52 or y == 57 or x == 45 or x == 74:
-				img.set_pixel(x, y, METAL_DARK)
-			else:
-				img.set_pixel(x, y, METAL_GRAY)
-
-	# Mouse
-	for y in range(54, 58):
-		for x in range(78, 84):
-			img.set_pixel(x, y, METAL_GRAY)
-
-	# Papers/documents on desk
-	for y in range(18, 28):
-		for x in range(85, 105):
-			img.set_pixel(x, y, Color(0.95, 0.95, 0.92))
-	# Add text lines on paper
-	for line_y in [20, 22, 24, 26]:
-		for x in range(88, 102):
-			if x % 2 == 0:
-				img.set_pixel(x, line_y, Color(0.3, 0.3, 0.3))
-
-	# Telephone (right side)
-	for y in range(20, 30):
-		for x in range(55, 70):
-			if y < 26:
-				img.set_pixel(x, y, Color(0.2, 0.2, 0.2))  # Handset
-			else:
-				img.set_pixel(x, y, Color(0.3, 0.3, 0.3))  # Base
-
-	var texture = ImageTexture.create_from_image(img)
-	var sprite = Sprite2D.new()
-	sprite.texture = texture
-	sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	desk_node.add_child(sprite)
-
-	return desk_node
+	# Use photorealistic desk instead
+	return PhotorealisticGraphics.create_realistic_office_desk()
 
 ## Creates an office chair
 static func create_office_chair() -> Node2D:
