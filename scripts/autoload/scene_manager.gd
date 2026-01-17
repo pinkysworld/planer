@@ -3,7 +3,7 @@ extends Node
 
 const LoadingScreen = preload("res://scripts/utils/loading_screen.gd")
 
-var loading_screen: Control = null
+var loading_screen: CanvasLayer = null
 var current_scene: Node = null
 var is_transitioning: bool = false
 
@@ -31,7 +31,7 @@ func change_scene(scene_path: String) -> void:
 		await current_scene.fade_out()
 
 	if loading_screen:
-		loading_screen.show_screen()
+		loading_screen.show_loading()
 
 	# Start loading
 	call_deferred("_load_scene", scene_path)
@@ -54,7 +54,7 @@ func _load_scene(scene_path: String) -> void:
 		var status = ResourceLoader.load_threaded_get_status(scene_path, [progress])
 
 		if loading_screen:
-			loading_screen.update_progress(progress)
+			loading_screen.set_progress(progress * 100.0)
 
 		if status == ResourceLoader.THREAD_LOAD_LOADED:
 			break
@@ -78,7 +78,7 @@ func _load_scene(scene_path: String) -> void:
 
 	# Complete loading bar
 	if loading_screen:
-		loading_screen.update_progress(1.0)
+		loading_screen.set_progress(100.0)
 
 	await get_tree().create_timer(0.3).timeout
 
@@ -89,7 +89,7 @@ func _load_scene(scene_path: String) -> void:
 
 	# Hide loading screen
 	if loading_screen:
-		loading_screen.hide_screen()
+		loading_screen.hide_loading()
 		await get_tree().create_timer(0.5).timeout
 		loading_screen.queue_free()
 		loading_screen = null
