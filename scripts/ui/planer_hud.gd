@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var money_display: Label
 @onready var fuel_bar: ProgressBar
 @onready var option_list: RichTextLabel
+var hint_text: String = ""
 
 const HUD_HEIGHT: int = 140
 const LAPTOP_COLOR: Color = Color(0.25, 0.3, 0.35)
@@ -262,9 +263,12 @@ func _format_money(amount: float) -> String:
 
 func show_hint(text: String) -> void:
 	# Can show hints in the option list
-	pass
+	hint_text = text
+	if option_list:
+		option_list.text = "[b]TIP[/b]\n%s" % text
 
 func hide_hint() -> void:
+	hint_text = ""
 	_update_options()
 
 func update_location(location: String) -> void:
