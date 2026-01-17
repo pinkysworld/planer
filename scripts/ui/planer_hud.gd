@@ -244,7 +244,7 @@ func _update_time() -> void:
 		var minute = GameManager.current_minute
 		time_display.text = "%02d:%02d" % [hour, minute]
 
-func _update_money() -> void:
+func _update_money(_company_money: float = 0.0, _private_money: float = 0.0) -> void:
 	if money_display:
 		var money = GameManager.company_money
 		money_display.text = "€ %s" % _format_money(money)
