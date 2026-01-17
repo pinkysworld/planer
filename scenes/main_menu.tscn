@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqxk3t8nj5h2l"]
 
-[ext_resource type="Script" path="res://scripts/ui/main_menu.gd" id="1_menu"]
+[ext_resource type="Script" path="res://scripts/ui/retro_main_menu.gd" id="1_menu"]
 [ext_resource type="Script" path="res://scripts/ui/scenario_selector.gd" id="2_scenario"]
 
 [node name="MainMenu" type="Control"]
