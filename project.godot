@@ -19,6 +19,7 @@ buses/default_bus_layout="res://audio/default_bus_layout.tres"
 
 [autoload]
 
+SettingsManager="*res://scripts/autoload/settings_manager.gd"
 GameManager="*res://scripts/autoload/game_manager.gd"
 AudioManager="*res://scripts/autoload/audio_manager.gd"
 SaveManager="*res://scripts/autoload/save_manager.gd"
@@ -30,6 +31,11 @@ EmployeeAI="*res://scripts/autoload/employee_ai.gd"
 VisualEffects="*res://scripts/autoload/visual_effects.gd"
 InsuranceSystem="*res://scripts/autoload/insurance_system.gd"
 ResearchSystem="*res://scripts/autoload/research_system.gd"
+TextureCache="*res://scripts/autoload/texture_cache.gd"
+SceneManager="*res://scripts/autoload/scene_manager.gd"
+NotificationManager="*res://scripts/autoload/notification_manager.gd"
+AutoSaveSystem="*res://scripts/autoload/auto_save_system.gd"
+StartupManager="*res://scripts/autoload/startup_manager.gd"
 
 [display]
 

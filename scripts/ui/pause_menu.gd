@@ -30,7 +30,8 @@ func _on_main_menu_pressed() -> void:
 	# Confirm before returning to main menu
 	_show_confirm_dialog("Return to main menu? Unsaved progress will be lost.", func():
 		GameManager.resume_game()
-		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
+		# Use SceneManager for professional transition
+		SceneManager.return_to_main_menu()
 	)
 
 func _on_quit_pressed() -> void:
