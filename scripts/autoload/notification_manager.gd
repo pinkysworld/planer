@@ -77,7 +77,7 @@ func show_toast(message: String, duration: float = 2.0) -> void:
 	toast.custom_minimum_size = label_size + Vector2(20, 10)
 	label.position = Vector2(10, 5)
 
-	var viewport_size = get_viewport_rect().size
+	var viewport_size = get_viewport().get_visible_rect().size
 	toast.position = Vector2(
 		(viewport_size.x - toast.custom_minimum_size.x) / 2,
 		viewport_size.y - 100
