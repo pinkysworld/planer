@@ -6,6 +6,7 @@ signal floor_changed(floor_number: int)
 
 const PlanerGraphics = preload("res://scripts/graphics/planer_graphics.gd")
 const EnhancedGraphics = preload("res://scripts/graphics/enhanced_graphics.gd")
+const RoomGraphics = preload("res://scripts/graphics/room_graphics.gd")
 
 var rooms: Dictionary = {
 	"Room_Garage": {"name": "Garage", "floor": 0, "description": "Manage and repair your truck fleet"},
@@ -72,12 +73,21 @@ func _create_floor(floor_num: int) -> Node2D:
 	floor_container.name = "Floor%d" % floor_num
 	floor_container.visible = (floor_num == current_floor)
 
-	# Background - gradient sky
+	# Background - realistic gradient sky
 	var bg = ColorRect.new()
 	bg.size = Vector2(1280, 720)
 	bg.position = Vector2(0, 0)
-	bg.color = Color(0.2, 0.25, 0.35)
+	# Create sky gradient (lighter at top, darker at bottom)
+	bg.color = Color(0.45, 0.55, 0.70)  # Sky blue
 	floor_container.add_child(bg)
+
+	# Add some clouds (simple white shapes)
+	for i in range(3):
+		var cloud = ColorRect.new()
+		cloud.size = Vector2(80 + i * 20, 30)
+		cloud.position = Vector2(200 + i * 300, 100 + i * 50)
+		cloud.color = Color(0.9, 0.92, 0.95, 0.7)
+		floor_container.add_child(cloud)
 
 	# Corridor wall (concrete texture)
 	var wall = PlanerGraphics.create_wall_texture(1280, 180)
@@ -104,19 +114,118 @@ func _create_floor(floor_num: int) -> Node2D:
 	# Add elevator
 	_add_elevator_to_floor(floor_container)
 
-	# Add office furniture for detail
-	if floor_num == 2:  # Office floor
-		var desk = EnhancedGraphics.create_textured_desk()
-		desk.position = Vector2(100, 550)
+	# Add detailed room furniture and decorations
+	if floor_num == 0:  # Basement - Garage floor
+		# Tool chest
+		var tool_chest = RoomGraphics.create_tool_chest()
+		tool_chest.position = Vector2(80, 540)
+		floor_container.add_child(tool_chest)
+
+		# Delivery van
+		var van = RoomGraphics.create_delivery_van()
+		van.position = Vector2(250, 500)
+		floor_container.add_child(van)
+
+		# Mechanic character
+		var mechanic = RoomGraphics.create_mechanic_character()
+		mechanic.position = Vector2(420, 570)
+		floor_container.add_child(mechanic)
+
+		# Safety poster
+		var poster = RoomGraphics.create_wall_poster("SAFETY FIRST")
+		poster.position = Vector2(900, 500)
+		floor_container.add_child(poster)
+
+	elif floor_num == 1:  # Ground floor - Reception/Contracts
+		# Reception desk
+		var desk = RoomGraphics.create_office_desk()
+		desk.position = Vector2(150, 530)
 		floor_container.add_child(desk)
 
-		var chair = EnhancedGraphics.create_office_chair()
-		chair.position = Vector2(160, 560)
+		# Office chair
+		var chair = RoomGraphics.create_office_chair()
+		chair.position = Vector2(180, 570)
 		floor_container.add_child(chair)
 
-		var cabinet = EnhancedGraphics.create_filing_cabinet()
-		cabinet.position = Vector2(1150, 550)
-		floor_container.add_child(cabinet)
+		# Potted plant (left)
+		var plant1 = RoomGraphics.create_potted_plant()
+		plant1.position = Vector2(50, 550)
+		floor_container.add_child(plant1)
+
+		# Potted plant (right)
+		var plant2 = RoomGraphics.create_potted_plant()
+		plant2.position = Vector2(1100, 550)
+		floor_container.add_child(plant2)
+
+	elif floor_num == 2:  # Upper floor - Executive offices
+		# Executive desk (left)
+		var desk1 = RoomGraphics.create_office_desk()
+		desk1.position = Vector2(100, 530)
+		floor_container.add_child(desk1)
+
+		# Office chair
+		var chair1 = RoomGraphics.create_office_chair()
+		chair1.position = Vector2(140, 570)
+		floor_container.add_child(chair1)
+
+		# Filing cabinet (left side)
+		var cabinet1 = RoomGraphics.create_filing_cabinet()
+		cabinet1.position = Vector2(50, 540)
+		floor_container.add_child(cabinet1)
+
+		# Another desk (middle)
+		var desk2 = RoomGraphics.create_office_desk()
+		desk2.position = Vector2(550, 530)
+		floor_container.add_child(desk2)
+
+		# Chair for second desk
+		var chair2 = RoomGraphics.create_office_chair()
+		chair2.position = Vector2(590, 570)
+		floor_container.add_child(chair2)
+
+		# Filing cabinet (right side)
+		var cabinet2 = RoomGraphics.create_filing_cabinet()
+		cabinet2.position = Vector2(1150, 540)
+		floor_container.add_child(cabinet2)
+
+		# Decorative plants
+		var plant1 = RoomGraphics.create_potted_plant()
+		plant1.position = Vector2(350, 550)
+		floor_container.add_child(plant1)
+
+		var plant2 = RoomGraphics.create_potted_plant()
+		plant2.position = Vector2(900, 550)
+		floor_container.add_child(plant2)
+
+	elif floor_num == 3:  # Top floor - Board room
+		# Conference table (simplified - represented by large desk)
+		var desk = RoomGraphics.create_office_desk()
+		desk.position = Vector2(500, 530)
+		desk.scale = Vector2(2.5, 1.5)
+		floor_container.add_child(desk)
+
+		# Chairs around table
+		var chair1 = RoomGraphics.create_office_chair()
+		chair1.position = Vector2(450, 560)
+		floor_container.add_child(chair1)
+
+		var chair2 = RoomGraphics.create_office_chair()
+		chair2.position = Vector2(700, 560)
+		floor_container.add_child(chair2)
+
+		# Wall poster
+		var poster = RoomGraphics.create_wall_poster("EXCELLENCE")
+		poster.position = Vector2(250, 500)
+		floor_container.add_child(poster)
+
+		# Potted plants
+		var plant1 = RoomGraphics.create_potted_plant()
+		plant1.position = Vector2(100, 550)
+		floor_container.add_child(plant1)
+
+		var plant2 = RoomGraphics.create_potted_plant()
+		plant2.position = Vector2(1050, 550)
+		floor_container.add_child(plant2)
 
 	return floor_container
 
@@ -293,8 +402,8 @@ func _setup_player() -> void:
 	player.set_script(script)
 
 func _setup_hud() -> void:
-	# Load the retro Der Planer HUD
-	var hud_script = load("res://scripts/ui/retro_game_hud.gd")
+	# Load the authentic Der Planer HUD
+	var hud_script = load("res://scripts/ui/authentic_planer_hud.gd")
 	game_hud = CanvasLayer.new()
 	game_hud.set_script(hud_script)
 	add_child(game_hud)
