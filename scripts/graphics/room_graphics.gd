@@ -1,5 +1,5 @@
 extends Node
-## RoomGraphics - Authentic Der Planer room and object pixel art
+## RoomGraphics - Authentic Der Planer room and object pixel art with realistic textures
 
 class_name RoomGraphics
 
@@ -18,19 +18,17 @@ const TRUCK_BODY: Color = Color(0.90, 0.88, 0.85)
 const GARAGE_FLOOR: Color = Color(0.42, 0.44, 0.46)
 const WALL_LIGHT: Color = Color(0.72, 0.75, 0.78)
 
-## Creates an office desk with computer
+## Creates an office desk with computer using realistic textures
 static func create_office_desk() -> Node2D:
 	var desk_node = Node2D.new()
 	var img = Image.create(120, 80, false, Image.FORMAT_RGBA8)
 
-	# Desk top (wooden)
+	# Generate realistic wood texture for desk
+	var wood_texture_img = TextureGenerator.generate_wood_texture(120, 20, DESK_WOOD).get_image()
+	# Copy wood texture to desk top area
 	for y in range(15, 35):
 		for x in range(0, 120):
-			var wood_shade = DESK_WOOD
-			# Add wood grain
-			if (x + y) % 4 == 0:
-				wood_shade = DESK_WOOD.darkened(0.05)
-			img.set_pixel(x, y, wood_shade)
+			img.set_pixel(x, y, wood_texture_img.get_pixel(x, y - 15))
 
 	# Desk edge (darker)
 	for x in range(0, 120):
